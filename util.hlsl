@@ -8,18 +8,6 @@ float2 mod(float2 a, float2 b)
   return a - floor(a / b) * b;
 }
 
-float4 unpackColor(float4 src, int index)
-{
-    if(index == 0)
-    {
-        return fmod(src / 256, 1);
-    }
-    else
-    {
-        return fmod(floor(src / 512) / 256, 1);
-    }
-}
-
 #define INT_BITS (7)
 #define INT_USE_BITS (INT_BITS)
 #define COLOR_BITS (5)
@@ -80,4 +68,8 @@ UnpackedParams unpack(
     return o;
 }
 
-float SEED0 = 457, SEED1 = 117, SEED2 = 743, SEED3 = 174, SEED4 = 943;
+#define SEED0 457
+#define SEED1 117
+#define SEED2 743
+#define SEED3 174
+#define SEED4 943
