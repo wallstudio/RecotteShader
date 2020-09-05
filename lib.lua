@@ -47,42 +47,20 @@ function clamp(value, min, max)
 end
 
 
-function floatToInt(value, bits)
-    local integer = math.floor(value * (1 << bits));
-    return clamp(integer, 0, 1 << bits);
+function RGBA(r, g, b, a)
+    local rgba = {
+        r = clamp(r, 0, 256) / 255,
+        g = clamp(g, 0, 256) / 255,
+        b = clamp(b, 0, 256) / 255,
+        a = clamp(a, 0, 256) / 255,
+    };
+    return rgba;
 end
 
 
-function createLabelTemplate()
-    local label = {
-        f0_0 = "f0_0",
-        f0_1 = "f0_1",
-        f0_2 = "f0_2",
-        f1_x100 = "f1_x100",
-        f2_x100 = "f2_x100",
-        f3_x100 = "f3_x100",
-        f4_x100 = "f4_x100",
-        f5_x100 = "f5_x100",
-        c0_rgb_0 = "c0_rgb_0",
-        c0_a_0 = "c0_a_0",
-        c0_rgb_1 = "c0_rgb_1",
-        c0_a_1 = "c0_a_1",
-        c0_rgb_2 = "c0_rgb_2",
-        c0_a_2 = "c0_a_2",
-        c0_rgb_3 = "c0_rgb_3",
-        c0_a_3 = "c0_a_3",
-        c1_r_x100 = "c1_r_x100",
-        c1_g_x100 = "c1_g_x100",
-        c1_b_x100 = "c1_b_x100",
-        c1_a_x100 = "c1_a_x100",
-        c2_r_x100 = "c2_r_x100",
-        c2_g_x100 = "c2_g_x100",
-        c2_b_x100 = "c2_b_x100",
-        c2_a_x100 = "c2_a_x100",
-        c3_r_x100 = "c3_r_x100",
-        c3_g_x100 = "c3_g_x100",
-    };
-    return label;
+function floatToInt(value, bits)
+    local integer = math.floor(value * (1 << bits));
+    return clamp(integer, 0, 1 << bits);
 end
 
 
@@ -93,42 +71,75 @@ COLOR_USE_BITS = COLOR_BITS;
 COLOR_MAX = (1 << COLOR_BITS) - 1;
 
 
+function createLabelTemplate()
+    local label = {
+        f0_0 = {n="f0_0", v=0},
+        f0_1 = {n="f0_1", v=0},
+        f0_2 = {n="f0_2", v=0},
+        f1_x100 = {n="f1_x100", v=0},
+        f2_x100 = {n="f2_x100", v=0},
+        f3_x100 = {n="f3_x100", v=0},
+        f4_x100 = {n="f4_x100", v=0},
+        f5_x100 = {n="f5_x100", v=0},
+        c0_rgb_0 = {n="c0_rgb_0", v=RGB(1,1,1)},
+        c0_a_0 = {n="c0_a_0", v=COLOR_MAX},
+        c0_rgb_1 = {n="c0_rgb_1", v=RGB(1,1,1)},
+        c0_a_1 = {n="c0_a_1", v=COLOR_MAX},
+        c0_rgb_2 = {n="c0_rgb_2", v=RGB(1,1,1)},
+        c0_a_2 = {n="c0_a_2", v=COLOR_MAX},
+        c0_rgb_3 = {n="c0_rgb_3", v=RGB(1,1,1)},
+        c0_a_3 = {n="c0_a_3", v=COLOR_MAX},
+        c1_r_x100 = {n="c1_r_x100", v=0},
+        c1_g_x100 = {n="c1_g_x100", v=0},
+        c1_b_x100 = {n="c1_b_x100", v=0},
+        c1_a_x100 = {n="c1_a_x100", v=0},
+        c2_r_x100 = {n="c2_r_x100", v=0},
+        c2_g_x100 = {n="c2_g_x100", v=0},
+        c2_b_x100 = {n="c2_b_x100", v=0},
+        c2_a_x100 = {n="c2_a_x100", v=0},
+        c3_r_x100 = {n="c3_r_x100", v=0},
+        c3_g_x100 = {n="c3_g_x100", v=0},
+    };
+    return label;
+end
+
+
 function AddShaderProperty(prefix, l)
     -- 1本のfloatに3値(7bit)詰め込む
-    AddProperty(NewProperty(prefix.."f0_0", {ja=l.f0_0.."(0-127)", en="f0_0(0-127)"}, "int", nil, 0));
-    AddProperty(NewProperty(prefix.."f0_1", {ja=l.f0_1.."(0-127)", en="f0_1(0-127)"}, "int", nil, 0));
-    AddProperty(NewProperty(prefix.."f0_2", {ja=l.f0_2.."(0-127)", en="f0_2(0-127)"}, "int", nil, 0));
+    AddProperty(NewProperty(prefix.."f0_0", {ja=l.f0_0.n.."(0-127)", en="f0_0(0-127)"}, "int", nil, l.f0_0.v));
+    AddProperty(NewProperty(prefix.."f0_1", {ja=l.f0_1.n.."(0-127)", en="f0_1(0-127)"}, "int", nil, l.f0_1.v));
+    AddProperty(NewProperty(prefix.."f0_2", {ja=l.f0_2.n.."(0-127)", en="f0_2(0-127)"}, "int", nil, l.f0_2.v));
 
     -- 普通に5本float
-    AddProperty(NewProperty(prefix.."f1_x100", {ja=l.f1_x100.."(x100)", en="f1(x100)"}, "float", nil, 0));
-    AddProperty(NewProperty(prefix.."f2_x100", {ja=l.f2_x100.."(x100)", en="f2(x100)"}, "float", nil, 0));
-    AddProperty(NewProperty(prefix.."f3_x100", {ja=l.f3_x100.."(x100)", en="f3(x100)"}, "float", nil, 0));
-    AddProperty(NewProperty(prefix.."f4_x100", {ja=l.f4_x100.."(x100)", en="f4(x100)"}, "float", nil, 0));
-    AddProperty(NewProperty(prefix.."f5_x100", {ja=l.f5_x100.."(x100)", en="f5(x100)"}, "float", nil, 0));
+    AddProperty(NewProperty(prefix.."f1_x100", {ja=l.f1_x100.n.."(x100)", en="f1(x100)"}, "float", nil, l.f1_x100.v));
+    AddProperty(NewProperty(prefix.."f2_x100", {ja=l.f2_x100.n.."(x100)", en="f2(x100)"}, "float", nil, l.f2_x100.v));
+    AddProperty(NewProperty(prefix.."f3_x100", {ja=l.f3_x100.n.."(x100)", en="f3(x100)"}, "float", nil, l.f3_x100.v));
+    AddProperty(NewProperty(prefix.."f4_x100", {ja=l.f4_x100.n.."(x100)", en="f4(x100)"}, "float", nil, l.f4_x100.v));
+    AddProperty(NewProperty(prefix.."f5_x100", {ja=l.f5_x100.n.."(x100)", en="f5(x100)"}, "float", nil, l.f5_x100.v));
 
     -- 1本のColorに4色(5555bit)詰め込む
-    AddProperty(NewProperty(prefix.."c0_rgb_0", {ja=l.c0_rgb_0, en="c0_rgb_0"}, "color", nil, RGB(1,1,1)));
-    AddProperty(NewProperty(prefix.."c0_a_0", {ja=l.c0_a_0.."(0-"..COLOR_MAX..")", en="c0_a_0" }, "int", nil, COLOR_MAX));
-    AddProperty(NewProperty(prefix.."c0_rgb_1", {ja=l.c0_rgb_1, en="c0_rgb_1"}, "color", nil, RGB(1,1,1)));
-    AddProperty(NewProperty(prefix.."c0_a_1", {ja=l.c0_a_1.."(0-"..COLOR_MAX..")", en="c0_a_1" }, "int", nil, COLOR_MAX));
-    AddProperty(NewProperty(prefix.."c0_rgb_2", {ja=l.c0_rgb_2, en="c0_rgb_2"}, "color", nil, RGB(1,1,1)));
-    AddProperty(NewProperty(prefix.."c0_a_2", {ja=l.c0_a_2.."(0-"..COLOR_MAX..")", en="c0_a_2" }, "int", nil, COLOR_MAX));
-    AddProperty(NewProperty(prefix.."c0_rgb_3", {ja=l.c0_rgb_3, en="c0_rgb_3"}, "color", nil, RGB(1,1,1)));
-    AddProperty(NewProperty(prefix.."c0_a_3", {ja=l.c0_a_3.."(0-"..COLOR_MAX..")", en="c0_a_3" }, "int", nil, COLOR_MAX));
+    AddProperty(NewProperty(prefix.."c0_rgb_0", {ja=l.c0_rgb_0.n, en="c0_rgb_0"}, "color", nil, l.c0_rgb_0.v));
+    AddProperty(NewProperty(prefix.."c0_a_0", {ja=l.c0_a_0.n.."(0-"..COLOR_MAX..")", en="c0_a_0" }, "int", nil, l.c0_a_0.v));
+    AddProperty(NewProperty(prefix.."c0_rgb_1", {ja=l.c0_rgb_1.n, en="c0_rgb_1"}, "color", nil, l.c0_rgb_1.v));
+    AddProperty(NewProperty(prefix.."c0_a_1", {ja=l.c0_a_1.n.."(0-"..COLOR_MAX..")", en="c0_a_1" }, "int", nil, l.c0_a_1.v));
+    AddProperty(NewProperty(prefix.."c0_rgb_2", {ja=l.c0_rgb_2.n, en="c0_rgb_2"}, "color", nil, l.c0_rgb_2.v));
+    AddProperty(NewProperty(prefix.."c0_a_2", {ja=l.c0_a_2.n.."(0-"..COLOR_MAX..")", en="c0_a_2" }, "int", nil, l.c0_a_2.v));
+    AddProperty(NewProperty(prefix.."c0_rgb_3", {ja=l.c0_rgb_3.n, en="c0_rgb_3"}, "color", nil, l.c0_rgb_3.v));
+    AddProperty(NewProperty(prefix.."c0_a_3", {ja=l.c0_a_3.n.."(0-"..COLOR_MAX..")", en="c0_a_3" }, "int", nil, l.c0_a_3.v));
 
     -- のこり3本のColorは、12本のfloatにSplit
-    AddProperty(NewProperty(prefix.."c1_r_x100", {ja=l.c1_r_x100.."(x100)", en="c1_r(x100)"}, "float", nil, 0));
-    AddProperty(NewProperty(prefix.."c1_g_x100", {ja=l.c1_g_x100.."(x100)", en="c1_g(x100)"}, "float", nil, 0));
-    AddProperty(NewProperty(prefix.."c1_b_x100", {ja=l.c1_b_x100.."(x100)", en="c1_b(x100)"}, "float", nil, 0));
-    AddProperty(NewProperty(prefix.."c1_a_x100", {ja=l.c1_a_x100.."(x100)", en="c1_a(x100)"}, "float", nil, 0));
-    AddProperty(NewProperty(prefix.."c2_r_x100", {ja=l.c2_r_x100.."(x100)", en="c2_r(x100)"}, "float", nil, 0));
-    AddProperty(NewProperty(prefix.."c2_g_x100", {ja=l.c2_g_x100.."(x100)", en="c2_g(x100)"}, "float", nil, 0));
-    AddProperty(NewProperty(prefix.."c2_b_x100", {ja=l.c2_b_x100.."(x100)", en="c2_b(x100)"}, "float", nil, 0));
-    AddProperty(NewProperty(prefix.."c2_a_x100", {ja=l.c2_a_x100.."(x100)", en="c2_a(x100)"}, "float", nil, 0));
-    AddProperty(NewProperty(prefix.."c3_r_x100", {ja=l.c3_r_x100.."(x100)", en="c3_r(x100)"}, "float", nil, 0));
-    AddProperty(NewProperty(prefix.."c3_g_x100", {ja=l.c3_g_x100.."(x100)", en="c3_g(x100)"}, "float", nil, 0));
-    -- AddProperty(NewProperty(prefix.."c3_b_x100", {ja=l.c3_b_x100.."(x100)", en="c3_b(x100)"}, "float", nil, 0));
-    -- AddProperty(NewProperty(prefix.."c3_a_x100", {ja=l.c3_a_x100.."(x100)", en="c3_a(x100)"}, "float", nil, 0));
+    AddProperty(NewProperty(prefix.."c1_r_x100", {ja=l.c1_r_x100.n.."(x100)", en="c1_r(x100)"}, "float", nil, l.c1_r_x100.v));
+    AddProperty(NewProperty(prefix.."c1_g_x100", {ja=l.c1_g_x100.n.."(x100)", en="c1_g(x100)"}, "float", nil, l.c1_g_x100.v));
+    AddProperty(NewProperty(prefix.."c1_b_x100", {ja=l.c1_b_x100.n.."(x100)", en="c1_b(x100)"}, "float", nil, l.c1_b_x100.v));
+    AddProperty(NewProperty(prefix.."c1_a_x100", {ja=l.c1_a_x100.n.."(x100)", en="c1_a(x100)"}, "float", nil, l.c1_a_x100.v));
+    AddProperty(NewProperty(prefix.."c2_r_x100", {ja=l.c2_r_x100.n.."(x100)", en="c2_r(x100)"}, "float", nil, l.c2_r_x100.v));
+    AddProperty(NewProperty(prefix.."c2_g_x100", {ja=l.c2_g_x100.n.."(x100)", en="c2_g(x100)"}, "float", nil, l.c2_g_x100.v));
+    AddProperty(NewProperty(prefix.."c2_b_x100", {ja=l.c2_b_x100.n.."(x100)", en="c2_b(x100)"}, "float", nil, l.c2_b_x100.v));
+    AddProperty(NewProperty(prefix.."c2_a_x100", {ja=l.c2_a_x100.n.."(x100)", en="c2_a(x100)"}, "float", nil, l.c2_a_x100.v));
+    AddProperty(NewProperty(prefix.."c3_r_x100", {ja=l.c3_r_x100.n.."(x100)", en="c3_r(x100)"}, "float", nil, l.c3_r_x100.v));
+    AddProperty(NewProperty(prefix.."c3_g_x100", {ja=l.c3_g_x100.n.."(x100)", en="c3_g(x100)"}, "float", nil, l.c3_g_x100.v));
+    -- AddProperty(NewProperty(prefix.."c3_b_x100", {ja=l.c3_b_x100.n.."(x100)", en="c3_b(x100)"}, "float", nil, l.c3_b_x100.v));
+    -- AddProperty(NewProperty(prefix.."c3_a_x100", {ja=l.c3_a_x100.n.."(x100)", en="c3_a(x100)"}, "float", nil, l.c3_a_x100.v));
 end
 
 

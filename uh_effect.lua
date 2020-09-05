@@ -25,35 +25,35 @@ end
 
 function InitEffect()
     local label = createLabelTemplate();
-    -- label.f0_0 = "f0_0";
-    -- label.f0_1 = "f0_1";
-    -- label.f0_2 = "f0_2";
-    -- label.f1_x100 = "f1_x100";
-    -- label.f2_x100 = "f2_x100";
-    -- label.f3_x100 = "f3_x100";
-    -- label.f4_x100 = "f4_x100";
-    -- label.f5_x100 = "f5_x100";
-    -- label.c0_rgb_0 = "c0_rgb_0";
-    -- label.c0_a_0 = "c0_a_0";
-    -- label.c0_rgb_1 = "c0_rgb_1";
-    -- label.c0_a_1 = "c0_a_1";
-    -- label.c0_rgb_2 = "c0_rgb_2";
-    -- label.c0_a_2 = "c0_a_2";
-    -- label.c0_rgb_3 = "c0_rgb_3";
-    -- label.c0_a_3 = "c0_a_3";
-    -- label.c1_r_x100 = "c1_r_x100";
-    -- label.c1_g_x100 = "c1_g_x100";
-    -- label.c1_b_x100 = "c1_b_x100";
-    -- label.c1_a_x100 = "c1_a_x100";
-    -- label.c2_r_x100 = "c2_r_x100";
-    -- label.c2_g_x100 = "c2_g_x100";
-    -- label.c2_b_x100 = "c2_b_x100";
-    -- label.c2_a_x100 = "c2_a_x100";
-    -- label.c3_r_x100 = "c3_r_x100";
-    -- label.c3_g_x100 = "c3_g_x100";
+    -- label.f0_0 = {n="f0_0", v=0};
+    -- label.f0_1 = {n="f0_1", v=0};
+    -- label.f0_2 = {n="f0_2", v=0};
+    -- label.f1_x100 = {n="f1_x100", v=0};
+    -- label.f2_x100 = {n="f2_x100", v=0};
+    -- label.f3_x100 = {n="f3_x100", v=0};
+    -- label.f4_x100 = {n="f4_x100", v=0};
+    -- label.f5_x100 = {n="f5_x100", v=0};
+    -- label.c0_rgb_0 = {n="c0_rgb_0", v=RGB(1,1,1)};
+    -- label.c0_a_0 = {n="c0_a_0", v=COLOR_MAX};
+    -- label.c0_rgb_1 = {n="c0_rgb_1", v=RGB(1,1,1)};
+    -- label.c0_a_1 = {n="c0_a_1", v=COLOR_MAX};
+    -- label.c0_rgb_2 = {n="c0_rgb_2", v=RGB(1,1,1)};
+    -- label.c0_a_2 = {n="c0_a_2", v=COLOR_MAX};
+    -- label.c0_rgb_3 = {n="c0_rgb_3", v=RGB(1,1,1)};
+    -- label.c0_a_3 = {n="c0_a_3", v=COLOR_MAX};
+    -- label.c1_r_x100 = {n="c1_r_x100", v=0};
+    -- label.c1_g_x100 = {n="c1_g_x100", v=0};
+    -- label.c1_b_x100 = {n="c1_b_x100", v=0};
+    -- label.c1_a_x100 = {n="c1_a_x100", v=0};
+    -- label.c2_r_x100 = {n="c2_r_x100", v=0};
+    -- label.c2_g_x100 = {n="c2_g_x100", v=0};
+    -- label.c2_b_x100 = {n="c2_b_x100", v=0};
+    -- label.c2_a_x100 = {n="c2_a_x100", v=0};
+    -- label.c3_r_x100 = {n="c3_r_x100", v=0};
+    -- label.c3_g_x100 = {n="c3_g_x100", v=0};
 
     SetDuration(0.5);
-    AddShaderProperty(" ", createLabelTemplate());
+    AddShaderProperty(" ", label);
 end
 
 
