@@ -92,7 +92,7 @@ float4 main(
     color *= (1 - vignette) * vignetteDarkness;
     
     // コントラスト補正
-    color = 1 / (1 + exp(-contrast * (color - 0.5)));
+    color = shiftContrast(color, contrast);
 
     return color;
 }

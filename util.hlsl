@@ -1,11 +1,17 @@
-#define SEED0 457
-#define SEED1 117
-#define SEED2 743
-#define SEED3 174
-#define SEED4 943
+#define SEED0 457.427
+#define SEED1 117.7278
+#define SEED2 743.2872
+#define SEED3 174.78
+#define SEED4 943.677
 
-#define WHITE = float4(1, 1, 1, 1);
-#define BLACK = float4(0, 0, 0, 1);
+#define WHITE (float4(1, 1, 1, 1))
+#define BLACK (float4(0, 0, 0, 1))
+#define ONE4 (float4(1, 1, 1, 1))
+#define ONE3 (float3(1, 1, 1))
+#define ONE2 (float2(1, 1))
+#define ZERO4 (float4(0, 0, 0, 0))
+#define ZERO3 (float3(0, 0, 0))
+#define ZERO2 (float2(0, 0)
 
 #define INT_BITS (7)
 #define INT_USE_BITS (INT_BITS)
@@ -94,13 +100,119 @@ float4 tex(float2 uv)
 
 float rand(float2 co)
 {
-    return frac(sin(dot(co.xy, float2(12.9898, 78.233))) * 43758.5453);
+    return frac(sin(dot(co, float2(12.9898, 78.233))) * 43758.5453);
+}
+
+float rand3(float3 co)
+{
+    return frac(sin(dot(co, float3(12.9898, 78.233, 5415.41))) * 43758.5453);
+}
+
+float scaleNoise(float2 uv, float2 size, float seed, float stepSize)
+{
+    float3 pos = float3(uv*size/stepSize, seed);
+    float3 rate = frac(pos);
+    float3 base = floor(pos);
+    float v000 = rand3(base + float3(0, 0, 0));
+    float v001 = rand3(base + float3(0, 0, 1));
+    float v010 = rand3(base + float3(0, 1, 0));
+    float v011 = rand3(base + float3(0, 1, 1));
+    float v100 = rand3(base + float3(1, 0, 0));
+    float v101 = rand3(base + float3(1, 0, 1));
+    float v110 = rand3(base + float3(1, 1, 0));
+    float v111 = rand3(base + float3(1, 1, 1));
+    float v00 = lerp(v000, v100, rate.x);
+    float v01 = lerp(v001, v101, rate.x);
+    float v10 = lerp(v010, v110, rate.x);
+    float v11 = lerp(v011, v111, rate.x);
+    float v0 = lerp(v00, v10, rate.y);
+    float v1 = lerp(v01, v11, rate.y);
+    float v = lerp(v0, v1, rate.z);
+    return v;
+}
+
+float perlinNoise(float2 uv, float2 size, float seed, float stepScale)
+{
+    uint iterate = 6;
+    float sum = 0;
+    for(uint i = 0; i < iterate; i++)
+    {
+        sum += scaleNoise(uv, size, seed, (1 << i) * stepScale);
+    }
+    return sum / iterate;
+}
+
+float4 shiftContrast(float4 color, int contrast)
+{
+    return 1 / (1 + exp(-contrast * (color - 0.5)));
 }
 
 float2 mod(float2 a, float2 b)
 {
     return a - floor(a / b) * b;
 }
+
+float4 mono(float4 color)
+{
+    float gray = 0.2126*color.r + 0.7152*color.g + 0.0722*color.b;
+    return float4(gray, gray, gray, color.a);
+}
+
+float4 nega(float4 color)
+{
+    return float4((1 - color).rgb, color.a);
+}
+
+float4 screen(float4 color, float4 screenColor)
+{
+    float4 mix = nega(nega(color) * nega(screenColor));
+    return float4(mix.rgb, color.a);
+}
+
+float4 sobel(float2 uv, float2 size)
+{
+    float2 uvParPx = 1 / size;
+
+    float horizotal = 0;
+    horizotal += -1 * mono(tex(uv - uvParPx * float2(-1, -1))).r;
+    horizotal += -2 * mono(tex(uv - uvParPx * float2(-1, +0))).r;
+    horizotal += -1 * mono(tex(uv - uvParPx * float2(-1, +1))).r;
+    horizotal += +1 * mono(tex(uv - uvParPx * float2(+1, -1))).r;
+    horizotal += +2 * mono(tex(uv - uvParPx * float2(+1, +0))).r;
+    horizotal += +1 * mono(tex(uv - uvParPx * float2(+1, +1))).r;
+    float vertical = 0;
+    vertical += -1 * mono(tex(uv - uvParPx * float2(-1, -1))).r;
+    vertical += -2 * mono(tex(uv - uvParPx * float2(+0, -1))).r;
+    vertical += -1 * mono(tex(uv - uvParPx * float2(+1, -1))).r;
+    vertical += +1 * mono(tex(uv - uvParPx * float2(-1, +1))).r;
+    vertical += +2 * mono(tex(uv - uvParPx * float2(+0, +1))).r;
+    vertical += +1 * mono(tex(uv - uvParPx * float2(+1, +1))).r;
+
+    float ave = (abs(horizotal) + abs(vertical)) / 2;
+    return float4(ave, ave, ave, tex(uv).a);
+}
+
+
+float4 blur(float2 uv, float2 size)
+{
+    uint kernel = 7;
+    int hKernel = kernel/2;
+    float weights[] = { 1, 6, 15, 20, 15, 6, 1 };
+
+    float2 uvParUnit = 1 / size * 4;
+
+    float4 sum = ZERO4;
+    float weightSum = 0;
+    [unroll(kernel)] for(int i = -hKernel; i <= hKernel; i++)
+    [unroll(kernel)] for(int j = -hKernel; j <= hKernel; j++)
+    {
+        float weight = weights[i+hKernel] * weights[j+hKernel];
+        weightSum += weight;
+        sum += weight * tex(uv + uvParUnit * float2(i, j));
+    }
+    return sum / weightSum;
+}
+
 
 float4 dumpParam(UnpackedParams p, float2 pos)
 {
