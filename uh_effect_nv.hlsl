@@ -1,6 +1,6 @@
 #include "util.hlsl"
 
-#define PARAM_DEBUG 1
+#define PARAM_DEBUG 0
 
 float4 main( 
    float4 pos : SV_POSITION, // 正規化されてない
