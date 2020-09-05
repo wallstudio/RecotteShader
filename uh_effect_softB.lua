@@ -8,15 +8,15 @@ require "effects/lib"
 -- その為、こちらでShaderの設定をし、TransitionでGetShaderして描画するようにしている。
 function GetInfo()
     local info = {
-        name = "uh_effect_2bc",
+        name = "uh_effect_softB",
         displayname = {
-            en = "uh_effect_2bc",
-            ja = "UH_ゲームボーイ"
+            en = "uh_effect_softB",
+            ja = "UH_境界ぼかし"
         },
         tag = "video",
         -- affects = AF_Shader, 
         shader = {
-            ps = "../uh_effect_2bc.cso"
+            ps = "../uh_effect_softB.cso"
         }
     };
     return info;
@@ -25,17 +25,17 @@ end
 
 function InitEffect()
     local label = createLabelTemplate();
-    label.f0_0 = {n="ドットサイズ", v=15};
-    label.f0_1 = {n="諧調数", v=4};
-    label.f0_2 = {n="コントラスト", v=8};
-    -- label.f1_x100 = {n="f1_x100", v=0};
+    label.f0_0 = {n="境界の明瞭度", v=2};
+    label.f0_1 = {n="モード", v=0};
+    -- label.f0_2 = {n="f0_2", v=0};
+    label.f1_x100 = {n="ぼかしの強度", v=424.00};
     -- label.f2_x100 = {n="f2_x100", v=0};
     -- label.f3_x100 = {n="f3_x100", v=0};
     -- label.f4_x100 = {n="f4_x100", v=0};
     -- label.f5_x100 = {n="f5_x100", v=0};
-    label.c0_rgb_0 = {n="フィルタ色1", v=RGBA(19,57,0,1)};
+    -- label.c0_rgb_0 = {n="c0_rgb_0", v=RGB(1,1,1)};
     -- label.c0_a_0 = {n="c0_a_0", v=COLOR_MAX};
-    label.c0_rgb_1 = {n="フィルタ色2", v=RGBA(174,184,43,1)};
+    -- label.c0_rgb_1 = {n="c0_rgb_1", v=RGB(1,1,1)};
     -- label.c0_a_1 = {n="c0_a_1", v=COLOR_MAX};
     -- label.c0_rgb_2 = {n="c0_rgb_2", v=RGB(1,1,1)};
     -- label.c0_a_2 = {n="c0_a_2", v=COLOR_MAX};
@@ -53,11 +53,11 @@ function InitEffect()
     -- label.c3_g_x100 = {n="c3_g_x100", v=0};
 
     SetDuration(0.5);
-    AddShaderProperty("2bc_", label);
+    AddShaderProperty("sotB_", label);
 end
 
 
 function ApplyEffect(effInfo, param)
-    param.shader = SetShaderProperty("2bc_", param);
+    param.shader = SetShaderProperty("sotB_", param);
     return param;
 end

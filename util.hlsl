@@ -179,6 +179,7 @@ float4 screen(float4 color, float4 screenColor)
     return float4(mix.rgb, color.a);
 }
 
+
 float4 sobel(float2 uv, float2 size)
 {
     float2 uvParPx = 1 / size;
@@ -203,6 +204,30 @@ float4 sobel(float2 uv, float2 size)
 }
 
 
+float border(float2 uv, float2 size)
+{
+    float2 uvParPx = 1 / size;
+
+    float horizotal = 0;
+    horizotal += -1 * tex(uv - uvParPx * float2(-1, -1)).a;
+    horizotal += -2 * tex(uv - uvParPx * float2(-1, +0)).a;
+    horizotal += -1 * tex(uv - uvParPx * float2(-1, +1)).a;
+    horizotal += +1 * tex(uv - uvParPx * float2(+1, -1)).a;
+    horizotal += +2 * tex(uv - uvParPx * float2(+1, +0)).a;
+    horizotal += +1 * tex(uv - uvParPx * float2(+1, +1)).a;
+    float vertical = 0;
+    vertical += -1 * tex(uv - uvParPx * float2(-1, -1)).a;
+    vertical += -2 * tex(uv - uvParPx * float2(+0, -1)).a;
+    vertical += -1 * tex(uv - uvParPx * float2(+1, -1)).a;
+    vertical += +1 * tex(uv - uvParPx * float2(-1, +1)).a;
+    vertical += +2 * tex(uv - uvParPx * float2(+0, +1)).a;
+    vertical += +1 * tex(uv - uvParPx * float2(+1, +1)).a;
+
+    float ave = (abs(horizotal) + abs(vertical)) / 2;
+    return ave;
+}
+
+
 float4 blur(float2 uv, float2 size)
 {
     uint kernel = 7;
@@ -219,6 +244,27 @@ float4 blur(float2 uv, float2 size)
         float weight = weights[i+hKernel] * weights[j+hKernel];
         weightSum += weight;
         sum += weight * tex(uv + uvParUnit * float2(i, j));
+    }
+    return sum / weightSum;
+}
+
+
+float4 bluredBorder(float2 uv, float2 size)
+{
+    uint kernel = 7;
+    int hKernel = kernel/2;
+    float weights[] = { 1, 6, 15, 20, 15, 6, 1 };
+
+    float2 uvParUnit = 1 / size * 4;
+
+    float4 sum = ZERO4;
+    float weightSum = 0;
+    [unroll(kernel)] for(int i = -hKernel; i <= hKernel; i++)
+    [unroll(kernel)] for(int j = -hKernel; j <= hKernel; j++)
+    {
+        float weight = weights[i+hKernel] * weights[j+hKernel];
+        weightSum += weight;
+        sum += weight * border(uv + uvParUnit * float2(i, j), size);
     }
     return sum / weightSum;
 }
