@@ -29,7 +29,7 @@ float4 main(
 
     float4 blurColor = blur(uv, float2(p.w, p.h));
 
-    float noise = 1 - noisePower * perlinNoise(uv, float2(p.w, p.h), t*p.f3, p.f2);
+    float noise = 1 - noisePower * perlinNoise(uv, float2(p.w, p.h), t*noiseSpeed, perlinScale);
 
     float4 edge = sobel(uv, float2(p.w, p.h));
     edge = nega(edge);

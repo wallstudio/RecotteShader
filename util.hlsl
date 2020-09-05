@@ -12,6 +12,7 @@
 #define ZERO4 (float4(0, 0, 0, 0))
 #define ZERO3 (float3(0, 0, 0))
 #define ZERO2 (float2(0, 0)
+#define T transpose
 
 #define INT_BITS (7)
 #define INT_USE_BITS (INT_BITS)
@@ -211,6 +212,114 @@ float4 blur(float2 uv, float2 size)
         sum += weight * tex(uv + uvParUnit * float2(i, j));
     }
     return sum / weightSum;
+}
+
+
+float4 rgb2Yuv(float4 color)
+{
+    float4x4 m = float4x4(
+        +0.299, +0.587, +0.114, 0,
+        -0.147, -0.289, +0.436, 0,
+        +0.615, -0.515, +0.100, 0,
+        +0.000, +0.000, +0.000, 1);
+    return (mul(m, (color)));
+}
+
+
+float4 yuv2Rgb(float4 color)
+{
+    float4x4 m = float4x4(
+        +1.000, +0.000, +1.140, 0,
+        +1.000, -0.395, -0.581, 0,
+        +1.000, +2.032, +0.000, 0,
+        +0.000, +0.000, +0.000, 1);
+    return (mul(m, (color)));
+}
+
+float4 rgb2Hsv(float4 color)
+{
+    float4 hsv = BLACK;
+
+    float maxValue = max(color.r, max(color.g, color.b));
+    float minValue = min(color.r, min(color.g, color.b));
+    float delta = maxValue - minValue;
+    
+    hsv.z = maxValue;
+    
+    if (maxValue != 0.0)
+    {
+        hsv.y = delta / maxValue;
+    } else 
+    {
+        hsv.y = 0.0;
+    }
+    
+    if (hsv.y > 0.0)
+    {
+        if (color.r == maxValue) 
+        {
+            hsv.x = (color.g - color.b) / delta;
+        }
+        else if (color.g == maxValue) 
+        {
+            hsv.x = 2 + (color.b - color.r) / delta;
+        }
+        else 
+        {
+            hsv.x = 4 + (color.r - color.g) / delta;
+        }
+        hsv.x /= 6.0;
+        if (hsv.x < 0)
+        {
+            hsv.x += 1.0;
+        }
+    }
+    
+    return hsv;
+}
+
+// HSV->RGB変換
+float4 hsv2Rgb(float4 color)
+{
+    float4 rgb = BLACK;
+
+    if (color.y == 0)
+    {
+        rgb.r = rgb.g = rgb.b = color.z;
+    } else {
+        color.x *= 6.0;
+        float i = floor (color.x);
+        float f = color.x - i;
+        float aa = color.z * (1 - color.y);
+        float bb = color.z * (1 - (color.y * f));
+        float cc = color.z * (1 - (color.y * (1 - f)));
+        if( i < 1 ) {
+            rgb.r = color.z;
+            rgb.g = cc;
+            rgb.b = aa;
+        } else if( i < 2 ) {
+            rgb.r = bb;
+            rgb.g = color.z;
+            rgb.b = aa;
+        } else if( i < 3 ) {
+            rgb.r = aa;
+            rgb.g = color.z;
+            rgb.b = cc;
+        } else if( i < 4 ) {
+            rgb.r = aa;
+            rgb.g = bb;
+            rgb.b = color.z;
+        } else if( i < 5 ) {
+            rgb.r = cc;
+            rgb.g = aa;
+            rgb.b = color.z;
+        } else {
+            rgb.r = color.z;
+            rgb.g = aa;
+            rgb.b = bb;
+        }
+    }
+    return rgb;
 }
 
 
