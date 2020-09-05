@@ -13,6 +13,8 @@ copy uh_effect_edge.lua dst\effects\
 copy uh_effect_edge.png dst\effects\
 copy uh_effect_nv.lua dst\effects\
 copy uh_effect_nv.png dst\effects\
+copy uh_effect_2bc.lua dst\effects\
+copy uh_effect_2bc.png dst\effects\
 copy uh_dummy.lua dst\transitions\
 copy uh_dummy.png dst\transitions\
 
@@ -20,4 +22,5 @@ copy uh_dummy.png dst\transitions\
 %COMPILER% /T ps_4_0 uh_effect_ctr.hlsl /Fo dst\uh_effect_ctr.cso /Fc shader_asm\uh_effect_ctr.hlsl
 %COMPILER% /T ps_4_0 uh_effect_edge.hlsl /Fo dst\uh_effect_edge.cso /Fc shader_asm\uh_effect_edge.hlsl
 %COMPILER% /T ps_4_0 uh_effect_nv.hlsl /Fo dst\uh_effect_nv.cso /Fc shader_asm\uh_effect_nv.hlsl
+%COMPILER% /T ps_4_0 uh_effect_2bc.hlsl /Fo dst\uh_effect_2bc.cso /Fc shader_asm\uh_effect_2bc.hlsl
 %COMPILER% /T ps_4_0 uh_dummy.hlsl /Fo dst\uh_dummy.cso /Fc shader_asm\uh_dummy.hlsl

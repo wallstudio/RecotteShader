@@ -99,6 +99,15 @@ float4 tex(float2 uv)
     return decTexture.Sample(decSampler, uv);
 }
 
+float4 lerp4(float4 x, float4 y, float rate)
+{
+    float r = lerp(x.r, y.r, rate);
+    float g = lerp(x.g, y.g, rate);
+    float b = lerp(x.b, y.b, rate);
+    float a = lerp(x.a, y.a, rate);
+    return float4(r, g, b, a);
+}
+
 float rand(float2 co)
 {
     return frac(sin(dot(co, float2(12.9898, 78.233))) * 43758.5453);
