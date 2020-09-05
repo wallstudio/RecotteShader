@@ -1,2 +1,0 @@
-"C:\Program Files (x86)\Windows Kits\10\bin\10.0.18362.0\x64\fxc.exe" /T ps_4_0 mod.hlsl /Fo mod.cso /Fc shader_asm/mod.hlsl 
-"C:\Program Files (x86)\Windows Kits\10\bin\10.0.18362.0\x64\fxc.exe" /T ps_4_0 passthrough.hlsl /Fo passthrough.cso /Fc shader_asm/passthrough.hlsl 

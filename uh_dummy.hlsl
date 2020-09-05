@@ -37,5 +37,5 @@ float4 main(
    float2 uvp : UVP
    ) : SV_TARGET
 {
-    return decTexture.Sample( decSampler, uv);
+    return float4(1, 0, 0, 1);
 }
