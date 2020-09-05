@@ -48,6 +48,11 @@ del effects\effects\%FILE_NAME%.lua
 del effects\effects\%FILE_NAME%.png
 cmd /c mklink effects\effects\%FILE_NAME%.lua "%PROJECT%\%FILE_NAME%.lua"
 cmd /c mklink effects\effects\%FILE_NAME%.png "%PROJECT%\%FILE_NAME%.png"
+set FILE_NAME=uh_effect_bloom
+del effects\effects\%FILE_NAME%.lua
+del effects\effects\%FILE_NAME%.png
+cmd /c mklink effects\effects\%FILE_NAME%.lua "%PROJECT%\%FILE_NAME%.lua"
+cmd /c mklink effects\effects\%FILE_NAME%.png "%PROJECT%\%FILE_NAME%.png"
 
 REM rem [Transitions]
 set FILE_NAME=uh_dummy
@@ -73,6 +78,9 @@ set FILE_NAME=uh_effect_2bc
 del effects\%FILE_NAME%.cso
 cmd /c mklink effects\%FILE_NAME%.cso "%PROJECT%\dst\%FILE_NAME%.cso"
 set FILE_NAME=uh_effect_softB
+del effects\%FILE_NAME%.cso
+cmd /c mklink effects\%FILE_NAME%.cso "%PROJECT%\dst\%FILE_NAME%.cso"
+set FILE_NAME=uh_effect_bloom
 del effects\%FILE_NAME%.cso
 cmd /c mklink effects\%FILE_NAME%.cso "%PROJECT%\dst\%FILE_NAME%.cso"
 set FILE_NAME=uh_dummy
