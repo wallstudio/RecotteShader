@@ -28,6 +28,7 @@ float4 main(
     float2 uvScale = float2(p.w, p.h) / float2(dotSize, dotSize);
     uv = floor(uv * uvScale) / uvScale;
     float4 color = tex(uv);
+    float a = color.a;
     
     // レベルダウン
     float rate = mono(color).r;
@@ -36,5 +37,5 @@ float4 main(
     color = lerp(filterColor0, filterColor1, rate);
     color = shiftContrast(color, contrast);
 
-    return color;
+    return float4(color.rgb, a);
 }
