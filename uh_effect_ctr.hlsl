@@ -30,8 +30,6 @@ float4 main(
 
     float rgbNoiseProb = p.c1_a;
     
-    float width = p.c2_r;
-    float height = p.c2_g;
     int horizotalDotSize = p.f0_0;
     int verticalDotSize = p.f0_1;
 
@@ -74,7 +72,7 @@ float4 main(
     }
 
     // 三色カラーフィルタを表現
-    float floorX = fmod((uv.x + 0.5) * width, 3 * horizotalDotSize);
+    float floorX = fmod((uv.x + 0.5) * p.w, 3 * horizotalDotSize);
     for(int i = 0; i < 3; i++)
     {
         float start = i * horizotalDotSize;
@@ -83,7 +81,7 @@ float4 main(
     }
 
     // 横縞
-    float scanLineColor = sin(uv.y * height / verticalDotSize) / 2 + 0.5;
+    float scanLineColor = sin(uv.y * p.h / verticalDotSize) / 2 + 0.5;
     color *= 0.5 + clamp(scanLineColor + 0.5, 0, 1) * 0.5;
     
     // 黒いのがパカパカするやつ

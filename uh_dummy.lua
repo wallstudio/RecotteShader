@@ -28,8 +28,6 @@ function Order(effInfo)
 end
 
 function RenderA(effInfo, tex, param)
-    -- mod_effectと合わせて使用、mod_effectで設定したものを取ってくる
-    param.shader = GetShader("ps")
     Draw(tex,param)
 end
 

@@ -53,6 +53,39 @@ function floatToInt(value, bits)
 end
 
 
+function createLabelTemplate()
+    local label = {
+        f0_0 = "f0_0",
+        f0_1 = "f0_1",
+        f0_2 = "f0_2",
+        f1_x100 = "f1_x100",
+        f2_x100 = "f2_x100",
+        f3_x100 = "f3_x100",
+        f4_x100 = "f4_x100",
+        f5_x100 = "f5_x100",
+        c0_rgb_0 = "c0_rgb_0",
+        c0_a_0 = "c0_a_0",
+        c0_rgb_1 = "c0_rgb_1",
+        c0_a_1 = "c0_a_1",
+        c0_rgb_2 = "c0_rgb_2",
+        c0_a_2 = "c0_a_2",
+        c0_rgb_3 = "c0_rgb_3",
+        c0_a_3 = "c0_a_3",
+        c1_r_x100 = "c1_r_x100",
+        c1_g_x100 = "c1_g_x100",
+        c1_b_x100 = "c1_b_x100",
+        c1_a_x100 = "c1_a_x100",
+        c2_r_x100 = "c2_r_x100",
+        c2_g_x100 = "c2_g_x100",
+        c2_b_x100 = "c2_b_x100",
+        c2_a_x100 = "c2_a_x100",
+        c3_r_x100 = "c3_r_x100",
+        c3_g_x100 = "c3_g_x100",
+    };
+    return label;
+end
+
+
 INT_BITS = 7;
 INT_USE_BITS = INT_BITS;
 COLOR_BITS = 5;
@@ -94,12 +127,12 @@ function AddShaderProperty(prefix, l)
     AddProperty(NewProperty(prefix.."c2_a_x100", {ja=l.c2_a_x100.."(x100)", en="c2_a(x100)"}, "float", nil, 0));
     AddProperty(NewProperty(prefix.."c3_r_x100", {ja=l.c3_r_x100.."(x100)", en="c3_r(x100)"}, "float", nil, 0));
     AddProperty(NewProperty(prefix.."c3_g_x100", {ja=l.c3_g_x100.."(x100)", en="c3_g(x100)"}, "float", nil, 0));
-    AddProperty(NewProperty(prefix.."c3_b_x100", {ja=l.c3_b_x100.."(x100)", en="c3_b(x100)"}, "float", nil, 0));
-    AddProperty(NewProperty(prefix.."c3_a_x100", {ja=l.c3_a_x100.."(x100)", en="c3_a(x100)"}, "float", nil, 0));
+    -- AddProperty(NewProperty(prefix.."c3_b_x100", {ja=l.c3_b_x100.."(x100)", en="c3_b(x100)"}, "float", nil, 0));
+    -- AddProperty(NewProperty(prefix.."c3_a_x100", {ja=l.c3_a_x100.."(x100)", en="c3_a(x100)"}, "float", nil, 0));
 end
 
 
-function SetShaderProperty(prefix)
+function SetShaderProperty(prefix, param)
     local f0_0 = GetProperty(prefix.."f0_0");
     local f0_1 = GetProperty(prefix.."f0_1");
     local f0_2 = GetProperty(prefix.."f0_2");
@@ -126,8 +159,11 @@ function SetShaderProperty(prefix)
     local c2_a = GetProperty(prefix.."c2_a_x100") / 100;
     local c3_r = GetProperty(prefix.."c3_r_x100") / 100;
     local c3_g = GetProperty(prefix.."c3_g_x100") / 100;
-    local c3_b = GetProperty(prefix.."c3_b_x100") / 100;
-    local c3_a = GetProperty(prefix.."c3_a_x100") / 100;
+    -- local c3_b = GetProperty(prefix.."c3_b_x100") / 100;
+    -- local c3_a = GetProperty(prefix.."c3_a_x100") / 100;
+    local c3_b = param.bounds.w;
+    local c3_a = param.bounds.h;
+
 
     local f0 = 
         (clamp(f0_0, 0, 1 << INT_BITS) << INT_USE_BITS*0) +

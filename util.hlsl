@@ -4,6 +4,9 @@
 #define SEED3 174
 #define SEED4 943
 
+#define WHITE = float4(1, 1, 1, 1);
+#define BLACK = float4(0, 0, 0, 1);
+
 #define INT_BITS (7)
 #define INT_USE_BITS (INT_BITS)
 #define COLOR_BITS (5)
@@ -35,6 +38,7 @@ struct UnpackedParams
     float c1_r, c1_g, c1_b, c1_a;
     float c2_r, c2_g, c2_b, c2_a;
     float c3_r, c3_g, c3_b, c3_a;
+    float w, h;
 };
 
 UnpackedParams unpack(
@@ -78,6 +82,8 @@ UnpackedParams unpack(
     o.c3_g = _Color3.g;
     o.c3_b = _Color3.b;
     o.c3_a = _Color3.a;
+    o.w = o.c3_b;
+    o.h = o.c3_a;
     return o;
 }
 
