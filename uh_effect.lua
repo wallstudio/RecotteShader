@@ -23,43 +23,45 @@ function GetInfo()
 end
 
 
-L_f0_0 = "f0_0";
-L_f0_1 = "f0_1";
-L_f0_2 = "f0_2";
-L_f1_x100 = "f1_x100";
-L_f2_x100 = "f2_x100";
-L_f3_x100 = "f3_x100";
-L_f4_x100 = "f4_x100";
-L_f5_x100 = "f5_x100";
-L_c0_rgb_0 = "c0_rgb_0";
-L_c0_a_0 = "c0_a_0";
-L_c0_rgb_1 = "c0_rgb_1";
-L_c0_a_1 = "c0_a_1";
-L_c0_rgb_2 = "c0_rgb_2";
-L_c0_a_2 = "c0_a_2";
-L_c0_rgb_3 = "c0_rgb_3";
-L_c0_a_3 = "c0_a_3";
-L_c1_r_x100 = "c1_r_x100";
-L_c1_g_x100 = "c1_g_x100";
-L_c1_b_x100 = "c1_b_x100";
-L_c1_a_x100 = "c1_a_x100";
-L_c2_r_x100 = "c2_r_x100";
-L_c2_g_x100 = "c2_g_x100";
-L_c2_b_x100 = "c2_b_x100";
-L_c2_a_x100 = "c2_a_x100";
-L_c3_r_x100 = "c3_r_x100";
-L_c3_g_x100 = "c3_g_x100";
-L_c3_b_x100 = "c3_b_x100";
-L_c3_a_x100 = "c3_a_x100";
-
-
 function InitEffect()
+
+    local label = {
+        f0_0 = "f0_0",
+        f0_1 = "f0_1",
+        f0_2 = "f0_2",
+        f1_x100 = "f1_x100",
+        f2_x100 = "f2_x100",
+        f3_x100 = "f3_x100",
+        f4_x100 = "f4_x100",
+        f5_x100 = "f5_x100",
+        c0_rgb_0 = "c0_rgb_0",
+        c0_a_0 = "c0_a_0",
+        c0_rgb_1 = "c0_rgb_1",
+        c0_a_1 = "c0_a_1",
+        c0_rgb_2 = "c0_rgb_2",
+        c0_a_2 = "c0_a_2",
+        c0_rgb_3 = "c0_rgb_3",
+        c0_a_3 = "c0_a_3",
+        c1_r_x100 = "c1_r_x100",
+        c1_g_x100 = "c1_g_x100",
+        c1_b_x100 = "c1_b_x100",
+        c1_a_x100 = "c1_a_x100",
+        c2_r_x100 = "c2_r_x100",
+        c2_g_x100 = "c2_g_x100",
+        c2_b_x100 = "c2_b_x100",
+        c2_a_x100 = "c2_a_x100",
+        c3_r_x100 = "c3_r_x100",
+        c3_g_x100 = "c3_g_x100",
+        c3_b_x100 = "c3_b_x100",
+        c3_a_x100 = "c3_a_x100",
+    };
+
     SetDuration(0.5);
-    AddShaderProperty();
+    AddShaderProperty(" ", label);
 end
 
 
 function ApplyEffect(effInfo, param)
-    param.shader = SetShaderProperty();
+    param.shader = SetShaderProperty(" ");
     return param;
 end

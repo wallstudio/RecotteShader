@@ -18,7 +18,7 @@ float4 main(
     #endif
 
 
-    float4 color = decTexture.Sample(decSampler, uv);
+    float4 color = tex(uv);
     color = float4((1-color).rgb, 1);
     return color;
 }

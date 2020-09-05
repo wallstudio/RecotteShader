@@ -60,10 +60,10 @@ float4 main(
     texUV += randomNoiseAmp * (rand(floor(texUV.y * SEED0) + t) - 0.5);
     texUV = fmod(texUV, 1);
     float4 color;
-    color.a = decTexture.Sample(decSampler, texUV).a;
-    color.r = decTexture.Sample(decSampler, texUV - float2(chromaShift * 0, 0)).r;
-    color.g = decTexture.Sample(decSampler, texUV - float2(chromaShift * 1, 0)).g;
-    color.b = decTexture.Sample(decSampler, texUV - float2(chromaShift * 2, 0)).b;
+    color.a = tex(texUV).a;
+    color.r = tex(texUV - float2(chromaShift * 0, 0)).r;
+    color.g = tex(texUV - float2(chromaShift * 1, 0)).g;
+    color.b = tex(texUV - float2(chromaShift * 2, 0)).b;
     
     // rgbNoiseProbの確率でラインをホワイトノイズに置き換える
     if (rand((rand(floor(texUV.y * SEED1) + t) - 0.5) + t) < rgbNoiseProb)

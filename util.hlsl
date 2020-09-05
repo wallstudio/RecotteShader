@@ -14,16 +14,16 @@ Texture2D<float4> decTexture;
 
 cbuffer cbuf0
 {
-  float4x4 colorMat;
-  float alpha;
-  int useColorKey, colorKeyRange, colorKeyAlpha;
-  float4 colorKey;
-  float brightness, contrast, gamma;
-  float reserved;
-  float x, y, width, height;
-  float t, timeInEffect;
-  float Float0, Float1, Float2, Float3, Float4, Float5;
-  float4 Color0, Color1, Color2, Color3;
+    float4x4 colorMat;
+    float alpha;
+    int useColorKey, colorKeyRange, colorKeyAlpha;
+    float4 colorKey;
+    float brightness, contrast, gamma;
+    float reserved;
+    float x, y, width, height;
+    float t, timeInEffect;
+    float Float0, Float1, Float2, Float3, Float4, Float5;
+    float4 Color0, Color1, Color2, Color3;
 }
 
 struct UnpackedParams
@@ -81,14 +81,19 @@ UnpackedParams unpack(
     return o;
 }
 
+float4 tex(float2 uv)
+{
+    return decTexture.Sample(decSampler, uv);
+}
+
 float rand(float2 co)
 {
-  return frac(sin(dot(co.xy, float2(12.9898, 78.233))) * 43758.5453);
+    return frac(sin(dot(co.xy, float2(12.9898, 78.233))) * 43758.5453);
 }
 
 float2 mod(float2 a, float2 b)
 {
-  return a - floor(a / b) * b;
+    return a - floor(a / b) * b;
 }
 
 float4 dumpParam(UnpackedParams p, float2 pos)
