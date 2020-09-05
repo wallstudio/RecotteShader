@@ -12,6 +12,11 @@ cd %RECOTTE%
 set PROJECT=%1
 set PROJECT=%PROJECT:"=%
 
+REM rem [Lib]
+set FILE_NAME=lib
+del effects\%FILE_NAME%.lua
+cmd /c mklink effects\%FILE_NAME%.lua "%PROJECT%\%FILE_NAME%.lua"
+
 REM rem [Effects]
 set FILE_NAME=uh_effect
 del effects\effects\%FILE_NAME%.lua

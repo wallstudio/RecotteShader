@@ -2,3 +2,4 @@
 test*
 *.cso
 /dst/
+log.yml

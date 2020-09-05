@@ -1,3 +1,6 @@
+require "effects/lib"
+
+
 function GetInfo()
 
     local info = {
