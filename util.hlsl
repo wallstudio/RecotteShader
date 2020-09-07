@@ -175,93 +175,83 @@ float4 screen(float4 color, float4 screenColor)
 }
 
 
+#define _SOBEL(dst, uv, size, monochromizer) \
+[unroll(1)] do \
+{ \
+    float2 uvParPx = 1 / size; \
+    float horizotal = 0; \
+    horizotal += -1 * monochromizer(tex(uv - uvParPx * float2(-1, -1))); \
+    horizotal += -2 * monochromizer(tex(uv - uvParPx * float2(-1, +0))); \
+    horizotal += -1 * monochromizer(tex(uv - uvParPx * float2(-1, +1))); \
+    horizotal += +1 * monochromizer(tex(uv - uvParPx * float2(+1, -1))); \
+    horizotal += +2 * monochromizer(tex(uv - uvParPx * float2(+1, +0))); \
+    horizotal += +1 * monochromizer(tex(uv - uvParPx * float2(+1, +1))); \
+    float vertical = 0; \
+    vertical += -1 * monochromizer(tex(uv - uvParPx * float2(-1, -1))); \
+    vertical += -2 * monochromizer(tex(uv - uvParPx * float2(+0, -1))); \
+    vertical += -1 * monochromizer(tex(uv - uvParPx * float2(+1, -1))); \
+    vertical += +1 * monochromizer(tex(uv - uvParPx * float2(-1, +1))); \
+    vertical += +2 * monochromizer(tex(uv - uvParPx * float2(+0, +1))); \
+    vertical += +1 * monochromizer(tex(uv - uvParPx * float2(+1, +1))); \
+    float ave = (abs(horizotal) + abs(vertical)) / 2; \
+    dst = float4(ave, ave, ave, tex(uv).a); \
+} \
+while(0);
+
+
+float _monochromizer_sobel(float4 color) { return mono(color).r; }
 float4 sobel(float2 uv, float2 size)
 {
-    float2 uvParPx = 1 / size;
-
-    float horizotal = 0;
-    horizotal += -1 * mono(tex(uv - uvParPx * float2(-1, -1))).r;
-    horizotal += -2 * mono(tex(uv - uvParPx * float2(-1, +0))).r;
-    horizotal += -1 * mono(tex(uv - uvParPx * float2(-1, +1))).r;
-    horizotal += +1 * mono(tex(uv - uvParPx * float2(+1, -1))).r;
-    horizotal += +2 * mono(tex(uv - uvParPx * float2(+1, +0))).r;
-    horizotal += +1 * mono(tex(uv - uvParPx * float2(+1, +1))).r;
-    float vertical = 0;
-    vertical += -1 * mono(tex(uv - uvParPx * float2(-1, -1))).r;
-    vertical += -2 * mono(tex(uv - uvParPx * float2(+0, -1))).r;
-    vertical += -1 * mono(tex(uv - uvParPx * float2(+1, -1))).r;
-    vertical += +1 * mono(tex(uv - uvParPx * float2(-1, +1))).r;
-    vertical += +2 * mono(tex(uv - uvParPx * float2(+0, +1))).r;
-    vertical += +1 * mono(tex(uv - uvParPx * float2(+1, +1))).r;
-
-    float ave = (abs(horizotal) + abs(vertical)) / 2;
-    return float4(ave, ave, ave, tex(uv).a);
+    float4 dst;
+    _SOBEL(dst, uv, size, _monochromizer_sobel);
+    return dst;
 }
 
 
+float _monochromizer_alpha(float4 color) { return color.a; }
 float border(float2 uv, float2 size)
 {
-    float2 uvParPx = 1 / size;
-
-    float horizotal = 0;
-    horizotal += -1 * tex(uv - uvParPx * float2(-1, -1)).a;
-    horizotal += -2 * tex(uv - uvParPx * float2(-1, +0)).a;
-    horizotal += -1 * tex(uv - uvParPx * float2(-1, +1)).a;
-    horizotal += +1 * tex(uv - uvParPx * float2(+1, -1)).a;
-    horizotal += +2 * tex(uv - uvParPx * float2(+1, +0)).a;
-    horizotal += +1 * tex(uv - uvParPx * float2(+1, +1)).a;
-    float vertical = 0;
-    vertical += -1 * tex(uv - uvParPx * float2(-1, -1)).a;
-    vertical += -2 * tex(uv - uvParPx * float2(+0, -1)).a;
-    vertical += -1 * tex(uv - uvParPx * float2(+1, -1)).a;
-    vertical += +1 * tex(uv - uvParPx * float2(-1, +1)).a;
-    vertical += +2 * tex(uv - uvParPx * float2(+0, +1)).a;
-    vertical += +1 * tex(uv - uvParPx * float2(+1, +1)).a;
-
-    float ave = (abs(horizotal) + abs(vertical)) / 2;
-    return ave;
+    float4 dst;
+    _SOBEL(dst, uv, size, _monochromizer_alpha);
+    return dst.r;
 }
 
+#define _BLUR(dst, uv, size, pxSampler) \
+[unroll(1)] do \
+{ \
+    uint kernel = 7; \
+    int hKernel = kernel/2; \
+    float weights[] = { 1, 6, 15, 20, 15, 6, 1 }; \
+    float2 uvParUnit = 1 / size * 4; \
+    float4 sum = ZERO4; \
+    float weightSum = 0; \
+    [unroll(kernel)] for(int i = -hKernel; i <= hKernel; i++) \
+    [unroll(kernel)] for(int j = -hKernel; j <= hKernel; j++) \
+    { \
+        float weight = weights[i+hKernel] * weights[j+hKernel]; \
+        weightSum += weight; \
+        sum += weight * pxSampler(uv + uvParUnit * float2(i, j), size); \
+    } \
+    return sum / weightSum; \
+} \
+while(0); \
 
+
+float4 _pxSampler_blur(float2 uv, float2 _) { return tex(uv); }
 float4 blur(float2 uv, float2 size)
 {
-    uint kernel = 7;
-    int hKernel = kernel/2;
-    float weights[] = { 1, 6, 15, 20, 15, 6, 1 };
-
-    float2 uvParUnit = 1 / size * 4;
-
-    float4 sum = ZERO4;
-    float weightSum = 0;
-    [unroll(kernel)] for(int i = -hKernel; i <= hKernel; i++)
-    [unroll(kernel)] for(int j = -hKernel; j <= hKernel; j++)
-    {
-        float weight = weights[i+hKernel] * weights[j+hKernel];
-        weightSum += weight;
-        sum += weight * tex(uv + uvParUnit * float2(i, j));
-    }
-    return sum / weightSum;
+    float4 dst;
+    _BLUR(dst, uv, size, _pxSampler_blur);
+    return dst;
 }
 
 
+float4 _pxSampler_bluredBorder(float2 uv, float2 size) { return border(uv, size); }
 float4 bluredBorder(float2 uv, float2 size)
 {
-    uint kernel = 7;
-    int hKernel = kernel/2;
-    float weights[] = { 1, 6, 15, 20, 15, 6, 1 };
-
-    float2 uvParUnit = 1 / size * 4;
-
-    float4 sum = ZERO4;
-    float weightSum = 0;
-    [unroll(kernel)] for(int i = -hKernel; i <= hKernel; i++)
-    [unroll(kernel)] for(int j = -hKernel; j <= hKernel; j++)
-    {
-        float weight = weights[i+hKernel] * weights[j+hKernel];
-        weightSum += weight;
-        sum += weight * border(uv + uvParUnit * float2(i, j), size);
-    }
-    return sum / weightSum;
+    float4 dst;
+    _BLUR(dst, uv, size, _pxSampler_bluredBorder);
+    return dst;
 }
 
 
