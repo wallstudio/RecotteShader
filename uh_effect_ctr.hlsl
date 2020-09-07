@@ -57,11 +57,11 @@ float4 main(
     texUV += uvOffset;
     texUV += randomNoiseAmp * (rand(floor(texUV.y * SEED0) + t) - 0.5);
     texUV = fmod(texUV, 1);
-    float4 color;
-    color.a = tex(texUV).a;
-    color.r = tex(texUV - float2(chromaShift * 0, 0)).r;
-    color.g = tex(texUV - float2(chromaShift * 1, 0)).g;
-    color.b = tex(texUV - float2(chromaShift * 2, 0)).b;
+    float4 color = float4(
+        tex(texUV - float2(chromaShift * 0, 0)).r,
+        tex(texUV - float2(chromaShift * 1, 0)).g,
+        tex(texUV - float2(chromaShift * 2, 0)).b,
+        1);
     
     // rgbNoiseProbの確率でラインをホワイトノイズに置き換える
     if (rand((rand(floor(texUV.y * SEED1) + t) - 0.5) + t) < rgbNoiseProb)
@@ -94,5 +94,5 @@ float4 main(
     // コントラスト補正
     color = shiftContrast(color, contrast);
 
-    return color;
+    return float4(color.rgb, tex(uv).a);
 }

@@ -149,7 +149,9 @@ float perlinNoise(float2 uv, float2 size, float seed, float stepScale)
 
 float4 shiftContrast(float4 color, int contrast)
 {
-    return 1 / (1 + exp(-contrast * (color - 0.5)));
+    float4 shifted = 1 / (1 + exp(-contrast * (color - 0.5)));
+    float4 clamped = clamp(shifted, 0, 1);
+    return float4(clamped.rgb, color.a);
 }
 
 float2 mod(float2 a, float2 b)
@@ -266,7 +268,7 @@ float4 rgb2Yuv(float4 color)
 }
 
 
-float4 yuv2Rgb(float4 color)
+float4 yuv2RGB256(float4 color)
 {
     float4x4 m = float4x4(
         +1.000, +0.000, +1.140, 0,
@@ -319,7 +321,7 @@ float4 rgb2Hsv(float4 color)
 }
 
 // HSV->RGB変換
-float4 hsv2Rgb(float4 color)
+float4 hsv2RGB256(float4 color)
 {
     float4 rgb = BLACK;
 

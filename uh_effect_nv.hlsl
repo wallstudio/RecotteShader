@@ -34,9 +34,10 @@ float4 main(
 
     float2 texUV = uv + 0.5;
     float4 color = tex(texUV);
+    float a = color.a;
     float4 hsv = rgb2Hsv(color);
     hsv.y *= chromaPower;
-    color = hsv2Rgb(hsv);
+    color = hsv2RGB256(hsv);
 
     color *= filterColor;
     color = shiftContrast(color, contrast);
@@ -48,5 +49,5 @@ float4 main(
     float vignetteDark = (1 - vignette) * vignetteDarkness;
     color *= shiftContrast(vignetteDark, vignetteContrast);
 
-    return color;
+    return float4(color.rgb, a);
 }

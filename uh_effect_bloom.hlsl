@@ -26,6 +26,7 @@ float4 main(
 
 
     float4 color = tex(uv);
+    float a = color.a;
     float4 bloom = blur(uv, float2(p.w, p.h));
     bloom *= bloomColor;
     bloom = shiftContrast(bloom, bloomContrast0);
@@ -36,5 +37,5 @@ float4 main(
     {
         color = screen(color, bloom);
     }
-    return color;
+    return float4(color.rgb, a);
 }
