@@ -37,5 +37,5 @@ float4 main(
     color = lerp(filterColor0, filterColor1, rate);
     color = shiftContrast(color, contrast);
 
-    return float4(color.rgb, a);
+    return ApplyBasicParamater(pos, float4(color.rgb, a));
 }

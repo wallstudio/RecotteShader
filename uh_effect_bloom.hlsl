@@ -37,5 +37,5 @@ float4 main(
     {
         color = screen(color, bloom);
     }
-    return float4(color.rgb, a);
+    return ApplyBasicParamater(pos, float4(color.rgb, a));
 }

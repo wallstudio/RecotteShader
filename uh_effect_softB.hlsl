@@ -32,5 +32,5 @@ float4 main(
 
     if(mode == 1) return _border;
     if(mode == 2) return tex(uv);
-    return float4(color.rgb, color.a * _border);
+    return ApplyBasicParamater(pos, float4(color.rgb, color.a * _border));
 }

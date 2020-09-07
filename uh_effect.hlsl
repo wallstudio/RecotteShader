@@ -20,5 +20,5 @@ float4 main(
 
     float4 color = tex(uv);
     color = nega(color);
-    return color;
+    return ApplyBasicParamater(pos, color);
 }

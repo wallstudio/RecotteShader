@@ -49,5 +49,5 @@ float4 main(
     float vignetteDark = (1 - vignette) * vignetteDarkness;
     color *= shiftContrast(vignetteDark, vignetteContrast);
 
-    return float4(color.rgb, a);
+    return ApplyBasicParamater(pos, float4(color.rgb, a));
 }

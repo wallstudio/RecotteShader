@@ -38,5 +38,5 @@ float4 main(
     float4 color = float4((blurColor * edge * noise).rgb, blurColor.a);
     color = shiftContrast(color, contrast);
     color = screen(color, screenColor);
-    return float4(color.rgb, tex(uv).a);
+    return ApplyBasicParamater(pos, float4(color.rgb, tex(uv).a));
 }

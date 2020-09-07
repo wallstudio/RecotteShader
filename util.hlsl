@@ -89,6 +89,34 @@ UnpackedParams unpack(
     return o;
 }
 
+float4 shiftContrast(float4 color, int contrast);
+float4 shiftGamma(float4 color, float gamma);
+float4 screen(float4 color, float4 screenColor);
+float4 ApplyBasicParamater(float2 pos, float4 fragColor)
+{
+    fragColor = clamp(fragColor, 0, 1);
+    if(useColorKey)
+    {
+        float4 key = colorKeyAlpha ? colorKey : float4(colorKey.rgb, fragColor.a);
+        float4 keyMin = clamp((key*256 - colorKeyRange/2) * 256, 0, 1);
+        float4 keyMax = clamp((key*256 + colorKeyRange/2) * 256, 0, 1);
+        if(keyMin.r <= fragColor.r && fragColor.r <= keyMax.r
+            && keyMin.g <= fragColor.g && fragColor.g <= keyMax.g
+            && keyMin.b <= fragColor.b && fragColor.b <= keyMax.b
+            && keyMin.a <= fragColor.a && fragColor.a <= keyMax.a)
+        {
+            return ZERO4;
+        }
+    }
+    fragColor = mul(fragColor, colorMat);
+    fragColor.a *= alpha;
+    fragColor = screen(fragColor, ONE4*brightness);
+    // fragColor = shiftContrast(fragColor, contrast); // 標準のShaderと計算方法が違うっぽくて再現できないのでとりあえず無視
+    fragColor = shiftGamma(fragColor, 1);
+    return fragColor;
+}
+
+
 float4 tex(float2 uv)
 {
     return decTexture.Sample(decSampler, uv);
@@ -150,6 +178,13 @@ float perlinNoise(float2 uv, float2 size, float seed, float stepScale)
 float4 shiftContrast(float4 color, int contrast)
 {
     float4 shifted = 1 / (1 + exp(-contrast * (color - 0.5)));
+    float4 clamped = clamp(shifted, 0, 1);
+    return float4(clamped.rgb, color.a);
+}
+
+float4 shiftGamma(float4 color, float gamma)
+{
+    float4 shifted = pow(color, 1/gamma);
     float4 clamped = clamp(shifted, 0, 1);
     return float4(clamped.rgb, color.a);
 }
