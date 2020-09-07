@@ -2,17 +2,17 @@
 
 RecotteStudioの追加エフェクトです。
 
-## インストール方法
+## 使い方
 
 1. RecotteStudioをインストール
 
-1. [WindowsSDK](https://developer.microsoft.com/ja-jp/windows/downloads/windows-10-sdk/)をインストール
+1. `install.bat`を実行（管理者権限が求められます）
 
-1. `build.bat`の`RECOTTE`変数に`fxc.exe`の在り処を書く
+1. レコスタのインストールディレクトリ下に追加Effectファイルが配置されます
 
-1. `build.bat`の実行
+1. レコスタを起動すると、エフェクトが増えています
 
-1. `install.bat`の実行（管理者権限が求められます）
+1. ビデオオブジェクトに設定したい場合はエフェクトと併用して「シェーダー適用」トランジションを追加してください
 
 ## 機能
 
@@ -28,6 +28,13 @@ RecotteStudioの追加エフェクトです。
 
 * ブルームシェーダーエフェクト
 
+## ビルド方法
+
+1. [WindowsSDK](https://developer.microsoft.com/ja-jp/windows/downloads/windows-10-sdk/)をインストール
+
+1. `build.bat`の`RECOTTE`変数に`fxc.exe`の在り処を書く
+
+1. `build.bat`の実行
 
 ## 開発方法
 

@@ -7,7 +7,7 @@ function GetInfo()
         name = "uh_dummy",
         displayname = {
             en = "mod",
-            ja = "もっど"
+            ja = "シェーダー適用"
         },
         shader = {
             ps = "../uh_dummy.cso"
