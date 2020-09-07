@@ -47,7 +47,8 @@ function clamp(value, min, max)
 end
 
 
-function RGBA(r, g, b, a)
+function RGB256(r, g, b) return RGBA256(r, g, b, 255) end
+function RGBA256(r, g, b, a)
     local rgba = {
         r = clamp(r, 0, 256) / 255,
         g = clamp(g, 0, 256) / 255,
@@ -81,10 +82,10 @@ function createLabelTemplate()
         f3_x100 = {n="f3_x100", v=0},
         f4_x100 = {n="f4_x100", v=0},
         f5_x100 = {n="f5_x100", v=0},
-        c0_rgb_0 = {n="c0_rgb_0", v=RGB(1,1,1)},
-        c0_rgb_1 = {n="c0_rgb_1", v=RGB(1,1,1)},
-        c0_rgb_2 = {n="c0_rgb_2", v=RGB(1,1,1)},
-        c0_rgb_3 = {n="c0_rgb_3", v=RGB(1,1,1)},
+        c0_rgb_0 = {n="c0_rgb_0", v=RGB256(255,255,255)},
+        c0_rgb_1 = {n="c0_rgb_1", v=RGB256(255,255,255)},
+        c0_rgb_2 = {n="c0_rgb_2", v=RGB256(255,255,255)},
+        c0_rgb_3 = {n="c0_rgb_3", v=RGB256(255,255,255)},
         c1_r_x100 = {n="c1_r_x100", v=0},
         c1_g_x100 = {n="c1_g_x100", v=0},
         c1_b_x100 = {n="c1_b_x100", v=0},

@@ -33,10 +33,10 @@ function InitEffect()
     -- label.f3_x100 = {n="f3_x100", v=0};
     -- label.f4_x100 = {n="f4_x100", v=0};
     -- label.f5_x100 = {n="f5_x100", v=0};
-    label.c0_rgb_0 = {n="フィルタ色", v=RGB(133,198,119)};
-    -- label.c0_rgb_1 = {n="c0_rgb_1", v=RGB(1,1,1)};
-    -- label.c0_rgb_2 = {n="c0_rgb_2", v=RGB(1,1,1)};
-    -- label.c0_rgb_3 = {n="c0_rgb_3", v=RGB(1,1,1)};
+    label.c0_rgb_0 = {n="フィルタ色", v=RGB256(133,198,119)};
+    -- label.c0_rgb_1 = {n="c0_rgb_1", v=RGB256(255,255,255)};
+    -- label.c0_rgb_2 = {n="c0_rgb_2", v=RGB256(255,255,255)};
+    -- label.c0_rgb_3 = {n="c0_rgb_3", v=RGB256(255,255,255)};
     label.c1_r_x100 = {n="Pノイズ速度", v=10000};
     label.c1_g_x100 = {n="Pノイズスケール", v=1000};
     label.c1_b_x100 = {n="Pノイズ強度", v=67};
