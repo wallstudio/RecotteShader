@@ -41,7 +41,6 @@ struct UnpackedParams
     uint f0_0, f0_1, f0_2;
     float f1, f2, f3, f4, f5;
     float4 c0_0, c0_1, c0_2, c0_3;
-    float c0_a_0, c0_a_1, c0_a_2, c0_a_3;
     float c1_r, c1_g, c1_b, c1_a;
     float c2_r, c2_g, c2_b, c2_a;
     float c3_r, c3_g, c3_b, c3_a;
@@ -73,10 +72,6 @@ UnpackedParams unpack(
     o.c0_1 = ((uint4(_Color0) >> (COLOR_USE_BITS*1)) & ((1<<COLOR_BITS) - 1)) / float(1<<COLOR_BITS);
     o.c0_2 = ((uint4(_Color0) >> (COLOR_USE_BITS*2)) & ((1<<COLOR_BITS) - 1)) / float(1<<COLOR_BITS);
     o.c0_3 = ((uint4(_Color0) >> (COLOR_USE_BITS*3)) & ((1<<COLOR_BITS) - 1)) / float(1<<COLOR_BITS);
-    o.c0_a_0 = o.c0_0.a;
-    o.c0_a_1 = o.c0_1.a;
-    o.c0_a_2 = o.c0_2.a;
-    o.c0_a_3 = o.c0_3.a;
     o.c1_r = _Color1.r;
     o.c1_g = _Color1.g;
     o.c1_b = _Color1.b;

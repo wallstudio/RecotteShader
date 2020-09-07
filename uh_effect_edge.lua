@@ -33,14 +33,10 @@ function InitEffect()
     label.f3_x100 = {n="Pノイズ強度", v=50};
     label.f4_x100 = {n="エッジ強度", v=200};
     -- label.f5_x100 = {n="f5_x100", v=0};
-    label.c0_rgb_0 = {n="スクリーン合成色", v=RGBA(60,59,56,255)};
-    -- label.c0_a_0 = {n="c0_a_0", v=COLOR_MAX};
+    label.c0_rgb_0 = {n="スクリーン合成色", v=RGB(60,59,56)};
     -- label.c0_rgb_1 = {n="c0_rgb_1", v=RGB(1,1,1)};
-    -- label.c0_a_1 = {n="c0_a_1", v=COLOR_MAX};
     -- label.c0_rgb_2 = {n="c0_rgb_2", v=RGB(1,1,1)};
-    -- label.c0_a_2 = {n="c0_a_2", v=COLOR_MAX};
     -- label.c0_rgb_3 = {n="c0_rgb_3", v=RGB(1,1,1)};
-    -- label.c0_a_3 = {n="c0_a_3", v=COLOR_MAX};
     -- label.c1_r_x100 = {n="c1_r_x100", v=0};
     -- label.c1_g_x100 = {n="c1_g_x100", v=0};
     -- label.c1_b_x100 = {n="c1_b_x100", v=0};

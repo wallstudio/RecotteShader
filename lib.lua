@@ -82,13 +82,9 @@ function createLabelTemplate()
         f4_x100 = {n="f4_x100", v=0},
         f5_x100 = {n="f5_x100", v=0},
         c0_rgb_0 = {n="c0_rgb_0", v=RGB(1,1,1)},
-        c0_a_0 = {n="c0_a_0", v=COLOR_MAX},
         c0_rgb_1 = {n="c0_rgb_1", v=RGB(1,1,1)},
-        c0_a_1 = {n="c0_a_1", v=COLOR_MAX},
         c0_rgb_2 = {n="c0_rgb_2", v=RGB(1,1,1)},
-        c0_a_2 = {n="c0_a_2", v=COLOR_MAX},
         c0_rgb_3 = {n="c0_rgb_3", v=RGB(1,1,1)},
-        c0_a_3 = {n="c0_a_3", v=COLOR_MAX},
         c1_r_x100 = {n="c1_r_x100", v=0},
         c1_g_x100 = {n="c1_g_x100", v=0},
         c1_b_x100 = {n="c1_b_x100", v=0},
@@ -119,13 +115,9 @@ function AddShaderProperty(prefix, l)
 
     -- 1本のColorに4色(5555bit)詰め込む
     AddProperty(NewProperty(prefix.."c0_rgb_0", {ja=l.c0_rgb_0.n, en="c0_rgb_0"}, "color", nil, l.c0_rgb_0.v));
-    AddProperty(NewProperty(prefix.."c0_a_0", {ja=l.c0_a_0.n.."(0-"..COLOR_MAX..")", en="c0_a_0" }, "int", nil, l.c0_a_0.v));
     AddProperty(NewProperty(prefix.."c0_rgb_1", {ja=l.c0_rgb_1.n, en="c0_rgb_1"}, "color", nil, l.c0_rgb_1.v));
-    AddProperty(NewProperty(prefix.."c0_a_1", {ja=l.c0_a_1.n.."(0-"..COLOR_MAX..")", en="c0_a_1" }, "int", nil, l.c0_a_1.v));
     AddProperty(NewProperty(prefix.."c0_rgb_2", {ja=l.c0_rgb_2.n, en="c0_rgb_2"}, "color", nil, l.c0_rgb_2.v));
-    AddProperty(NewProperty(prefix.."c0_a_2", {ja=l.c0_a_2.n.."(0-"..COLOR_MAX..")", en="c0_a_2" }, "int", nil, l.c0_a_2.v));
     AddProperty(NewProperty(prefix.."c0_rgb_3", {ja=l.c0_rgb_3.n, en="c0_rgb_3"}, "color", nil, l.c0_rgb_3.v));
-    AddProperty(NewProperty(prefix.."c0_a_3", {ja=l.c0_a_3.n.."(0-"..COLOR_MAX..")", en="c0_a_3" }, "int", nil, l.c0_a_3.v));
 
     -- のこり3本のColorは、12本のfloatにSplit
     AddProperty(NewProperty(prefix.."c1_r_x100", {ja=l.c1_r_x100.n.."(x100)", en="c1_r(x100)"}, "float", nil, l.c1_r_x100.v));
@@ -153,13 +145,9 @@ function SetShaderProperty(prefix, param)
     local f4 = GetProperty(prefix.."f4_x100") / 100;
     local f5 = GetProperty(prefix.."f5_x100") / 100;
     local c0_rgb_0 = GetProperty(prefix.."c0_rgb_0");
-    local c0_a_0 = GetProperty(prefix.."c0_a_0");
     local c0_rgb_1 = GetProperty(prefix.."c0_rgb_1");
-    local c0_a_1 = GetProperty(prefix.."c0_a_1");
     local c0_rgb_2 = GetProperty(prefix.."c0_rgb_2");
-    local c0_a_2 = GetProperty(prefix.."c0_a_2");
     local c0_rgb_3 = GetProperty(prefix.."c0_rgb_3");
-    local c0_a_3 = GetProperty(prefix.."c0_a_3");
     local c1_r = GetProperty(prefix.."c1_r_x100") / 100;
     local c1_g = GetProperty(prefix.."c1_g_x100") / 100;
     local c1_b = GetProperty(prefix.."c1_b_x100") / 100;
@@ -196,10 +184,10 @@ function SetShaderProperty(prefix, param)
         (floatToInt(c0_rgb_2.b, COLOR_BITS) << (COLOR_USE_BITS*2)) +
         (floatToInt(c0_rgb_3.b, COLOR_BITS) << (COLOR_USE_BITS*3));
     local c0_a = 
-        (clamp(c0_a_0, 0, 1 << COLOR_BITS) << (COLOR_USE_BITS*0)) +
-        (clamp(c0_a_1, 0, 1 << COLOR_BITS) << (COLOR_USE_BITS*1)) +
-        (clamp(c0_a_2, 0, 1 << COLOR_BITS) << (COLOR_USE_BITS*2)) +
-        (clamp(c0_a_2, 0, 1 << COLOR_BITS) << (COLOR_USE_BITS*3));
+        (floatToInt(c0_rgb_0.a, COLOR_BITS) << (COLOR_USE_BITS*0)) +
+        (floatToInt(c0_rgb_1.a, COLOR_BITS) << (COLOR_USE_BITS*1)) +
+        (floatToInt(c0_rgb_2.a, COLOR_BITS) << (COLOR_USE_BITS*2)) +
+        (floatToInt(c0_rgb_3.a, COLOR_BITS) << (COLOR_USE_BITS*3))
     local c0 = { r = c0_r, g = c0_g, b = c0_b, a = c0_a };
     local c1 = { r = c1_r, g = c1_g, b = c1_b, a = c1_a };
     local c2 = { r = c2_r, g = c2_g, b = c2_b, a = c2_a };

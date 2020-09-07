@@ -34,13 +34,9 @@ function InitEffect()
     label.f4_x100 = {n="Sノイズ振幅", v=2};
     label.f5_x100 = {n="Sノイズ位相", v=0};
     label.c0_rgb_0 = {n="背景色", v=RGBA(0,0,0,0)};
-    -- label.c0_a_0 = {n="c0_a_0", v=COLOR_MAX};
     -- label.c0_rgb_1 = {n="c0_rgb_1", v=RGB(1,1,1)};
-    -- label.c0_a_1 = {n="c0_a_1", v=COLOR_MAX};
     -- label.c0_rgb_2 = {n="c0_rgb_2", v=RGB(1,1,1)};
-    -- label.c0_a_2 = {n="c0_a_2", v=COLOR_MAX};
     -- label.c0_rgb_3 = {n="c0_rgb_3", v=RGB(1,1,1)};
-    -- label.c0_a_3 = {n="c0_a_3", v=COLOR_MAX};
     label.c1_r_x100 = {n="Sノイズ周波数", v=500};
     label.c1_g_x100 = {n="Sノイズランダム", v=0.2};
     label.c1_b_x100 = {n="色ずれ", v=0.3};

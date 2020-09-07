@@ -33,14 +33,10 @@ function InitEffect()
     -- label.f3_x100 = {n="f3_x100", v=0};
     -- label.f4_x100 = {n="f4_x100", v=0};
     -- label.f5_x100 = {n="f5_x100", v=0};
-    label.c0_rgb_0 = {n="フィルタ色1", v=RGBA(19,57,0,1)};
-    -- label.c0_a_0 = {n="c0_a_0", v=COLOR_MAX};
-    label.c0_rgb_1 = {n="フィルタ色2", v=RGBA(174,184,43,1)};
-    -- label.c0_a_1 = {n="c0_a_1", v=COLOR_MAX};
+    label.c0_rgb_0 = {n="フィルタ色1", v=RGB(19,57,0)};
+    label.c0_rgb_1 = {n="フィルタ色2", v=RGB(174,184,43)};
     -- label.c0_rgb_2 = {n="c0_rgb_2", v=RGB(1,1,1)};
-    -- label.c0_a_2 = {n="c0_a_2", v=COLOR_MAX};
     -- label.c0_rgb_3 = {n="c0_rgb_3", v=RGB(1,1,1)};
-    -- label.c0_a_3 = {n="c0_a_3", v=COLOR_MAX};
     -- label.c1_r_x100 = {n="c1_r_x100", v=0};
     -- label.c1_g_x100 = {n="c1_g_x100", v=0};
     -- label.c1_b_x100 = {n="c1_b_x100", v=0};
