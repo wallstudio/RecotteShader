@@ -94,5 +94,5 @@ float4 main(
     // コントラスト補正
     color = shiftContrast(color, contrast);
 
-    return ApplyBasicParamater(pos, float4(color.rgb, tex(uv).a));
+    return ApplyBasicParamater(pos, float4(color.rgb, tex(texUV).a));
 }
