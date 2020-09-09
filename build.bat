@@ -21,6 +21,7 @@ copy uh_effect_bloom.lua dst\effects\
 copy uh_effect_bloom.png dst\effects\
 copy uh_dummy.lua dst\transitions\
 copy uh_dummy.png dst\transitions\
+copy lib.lua dst\
 
 %COMPILER% /T ps_4_0 uh_effect.hlsl /Fo dst\uh_effect.cso /Fc shader_asm\uh_effect.hlsl
 %COMPILER% /T ps_4_0 uh_effect_ctr.hlsl /Fo dst\uh_effect_ctr.cso /Fc shader_asm\uh_effect_ctr.hlsl
