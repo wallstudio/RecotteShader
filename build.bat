@@ -19,6 +19,7 @@ copy uh_effect_softB.lua dst\effects\
 copy uh_effect_softB.png dst\effects\
 copy uh_effect_bloom.lua dst\effects\
 copy uh_effect_bloom.png dst\effects\
+copy uh_effect_rim.png dst\effects\
 
 copy uh_effect_exp3D.png dst\effects\
 
@@ -33,4 +34,6 @@ copy lib.lua dst\
 %COMPILER% /T ps_4_0 uh_effect_2bc.hlsl /Fo dst\uh_effect_2bc.cso /Fc shader_asm\uh_effect_2bc.hlsl
 %COMPILER% /T ps_4_0 uh_effect_softB.hlsl /Fo dst\uh_effect_softB.cso /Fc shader_asm\uh_effect_softB.hlsl
 %COMPILER% /T ps_4_0 uh_effect_bloom.hlsl /Fo dst\uh_effect_bloom.cso /Fc shader_asm\uh_effect_bloom.hlsl
+%COMPILER% /T ps_4_0 uh_effect_rim.hlsl /Fo dst\uh_effect_rim.cso /Fc shader_asm\uh_effect_rim.hlsl
+
 %COMPILER% /T ps_4_0 uh_dummy.hlsl /Fo dst\uh_dummy.cso /Fc shader_asm\uh_dummy.hlsl
