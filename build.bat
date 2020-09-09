@@ -19,8 +19,10 @@ copy uh_effect_softB.lua dst\effects\
 copy uh_effect_softB.png dst\effects\
 copy uh_effect_bloom.lua dst\effects\
 copy uh_effect_bloom.png dst\effects\
+copy uh_effect_rim.lua dst\effects\
 copy uh_effect_rim.png dst\effects\
 
+copy uh_effect_exp3D.lua dst\effects\
 copy uh_effect_exp3D.png dst\effects\
 
 copy uh_dummy.lua dst\transitions\
