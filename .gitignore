@@ -3,3 +3,4 @@ test*
 *.cso
 /dst/
 log.yml
+/*.zip
