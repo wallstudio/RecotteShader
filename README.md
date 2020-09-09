@@ -6,6 +6,8 @@ RecotteStudioの追加エフェクトです。
 
 1. RecotteStudioをインストール
 
+1. [こちら](https://github.com/wallstudio/RecotteShader/releases/)から最新版をダウンロードして適当なところに展開
+
 1. `install.bat`を実行（管理者権限が求められます）
 
 1. レコスタのインストールディレクトリ下に追加Effectファイルが配置されます
