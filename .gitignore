@@ -4,3 +4,4 @@ test*
 /dst/
 log.yml
 /*.zip
+/lua_table

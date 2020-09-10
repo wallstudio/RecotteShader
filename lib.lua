@@ -1,6 +1,6 @@
-function dumpFile(arg)
+function writeLineToFile(arg)
     -- file::writeするとなぜかそこでLuaの処理が失敗するため、cmd経由で回避
-    local path = "C:\\Users\\huser\\Desktop\\RecotteShader\\log.yml";
+    local path = "C:\\Users\\huser\\Documents\\Project\\RecotteShader\\log.yml";
     local msg = tostring(arg);
     msg = string.gsub(msg, "[\\<\\>\\^\\]", "^%0")
     local cmd = '"echo ' .. msg .. '" >> ' .. path;
@@ -8,30 +8,46 @@ function dumpFile(arg)
 end
 
 
-function dumpTable(obj, tab, depth)
-
-    if tab == nil then
-        dumpTable(obj, 0, 10);
-        return;
+function indexOf(array, item)
+    for i=1, #array do
+        if array[i] == item then
+            return i;
+        end
     end
+    return -1;
+end
+
+
+function dumpObj(obj)
+    local founds = {};
+    writeLineToFile("# START DUMP");
+    dumpObjImpl(obj, 0, founds);
+end
+
+
+function dumpObjImpl(obj, depth, founds)
 
     local str = "";
-
-    for i = 0, tab do
+    for i=0, depth do
         str = str .. "  ";
     end
-
-    if tab < depth and type(obj) == "table" then
-        for key, value in pairs(obj) do
-            dumpFile(str .. tostring(key) .. ":");
-            dumpTable(value, tab + 1, depth);
+    
+    
+    if type(obj) == "table" then
+        if indexOf(founds, obj) > 0 then
+            writeLineToFile(str .. tostring(obj) .. " (recursive)");
+        else
+            founds[#founds + 1] = obj;
+            for k, v in pairs(obj) do
+                writeLineToFile(str .. tostring(k) .. ":");
+                dumpObjImpl(v, depth + 1, founds);
+            end
         end
     elseif type(obj) == "number" then
-        dumpFile(str .. string.format("%f", obj));
+        writeLineToFile(str .. string.format("%f", obj));
     else
-        dumpFile(str .. tostring(obj));
+        writeLineToFile(str .. tostring(obj));
     end
-
     return str;
 end
 
