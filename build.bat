@@ -23,6 +23,8 @@ copy uh_effect_rim.lua dst\effects\
 copy uh_effect_rim.png dst\effects\
 copy uh_effect_rotate.lua dst\effects\
 copy uh_effect_rotate.png dst\effects\
+copy uh_effect_rotate2.lua dst\effects\
+copy uh_effect_rotate2.png dst\effects\
 
 copy uh_effect_exp3D.lua dst\effects\
 copy uh_effect_exp3D.png dst\effects\

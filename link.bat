@@ -63,6 +63,11 @@ del effects\effects\%FILE_NAME%.lua
 del effects\effects\%FILE_NAME%.png
 cmd /c mklink effects\effects\%FILE_NAME%.lua "%PROJECT%\%FILE_NAME%.lua"
 cmd /c mklink effects\effects\%FILE_NAME%.png "%PROJECT%\%FILE_NAME%.png"
+set FILE_NAME=uh_effect_rotate2
+del effects\effects\%FILE_NAME%.lua
+del effects\effects\%FILE_NAME%.png
+cmd /c mklink effects\effects\%FILE_NAME%.lua "%PROJECT%\%FILE_NAME%.lua"
+cmd /c mklink effects\effects\%FILE_NAME%.png "%PROJECT%\%FILE_NAME%.png"
 
 REM rem [SimpleEffects]
 set FILE_NAME=uh_effect_exp3D
