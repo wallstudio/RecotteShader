@@ -1,4 +1,4 @@
-#include "util.hlsl"
+#include "../lib/uh_util.hlsl"
 
 float4 main( 
    float4 pos : SV_POSITION,

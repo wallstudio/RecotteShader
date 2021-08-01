@@ -1,6 +1,6 @@
 function writeLineToFile(arg)
     -- file::writeするとなぜかそこでLuaの処理が失敗するため、cmd経由で回避
-    local path = "C:\\Users\\huser\\Documents\\Project\\RecotteShader\\log.yml";
+    local path = "C:\\Users\\huser\\Documents\\Project\\RecotteShader\\.dump\\log.yml";
     local msg = tostring(arg);
     msg = string.gsub(msg, "[\\<\\>\\^\\]", "^%0")
     local cmd = '"echo ' .. msg .. '" >> ' .. path;

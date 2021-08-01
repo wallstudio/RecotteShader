@@ -1,4 +1,4 @@
-require "effects/lib"
+require "uh_util"
 
 
 -- HACK:
@@ -8,15 +8,15 @@ require "effects/lib"
 -- その為、こちらでShaderの設定をし、TransitionでGetShaderして描画するようにしている。
 function GetInfo()
     local info = {
-        name = "uh_effect_rotate",
+        name = "uh_effect_softB",
         displayname = {
-            en = "uh_effect_rotate",
-            ja = "UH_PS回転"
+            en = "uh_effect_softB",
+            ja = "UH_境界ぼかし"
         },
         tag = "video",
         -- affects = AF_Shader, 
         shader = {
-            ps = "../uh_effect_rotate.cso"
+            ps = "uh_effect_softB.cso"
         }
     };
     return info;
@@ -25,10 +25,10 @@ end
 
 function InitEffect()
     local label = createLabelTemplate();
-    -- label.f0_0 = {n="回転（Z軸）", v=2};
-    -- label.f0_1 = {n="モード", v=0};
+    label.f0_0 = {n="境界の明瞭度", v=2};
+    label.f0_1 = {n="モード", v=0};
     -- label.f0_2 = {n="f0_2", v=0};
-    label.f1_x100 = {n="回転（Z軸）", v=0};
+    label.f1_x100 = {n="ぼかしの強度", v=424.00};
     -- label.f2_x100 = {n="f2_x100", v=0};
     -- label.f3_x100 = {n="f3_x100", v=0};
     -- label.f4_x100 = {n="f4_x100", v=0};
@@ -49,11 +49,11 @@ function InitEffect()
     -- label.c3_g_x100 = {n="c3_g_x100", v=0};
 
     SetDuration(0.5);
-    AddShaderProperty("rotZ_", label);
+    AddShaderProperty("sotB_", label);
 end
 
 
 function ApplyEffect(effInfo, param)
-    param.shader = SetShaderProperty("rotZ_", param);
+    param.shader = SetShaderProperty("sotB_", param);
     return param;
 end

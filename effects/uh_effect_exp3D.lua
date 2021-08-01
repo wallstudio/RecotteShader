@@ -1,4 +1,4 @@
-require "effects/lib"
+require "uh_util"
 
 function GetInfo()
 

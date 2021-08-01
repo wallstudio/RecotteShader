@@ -1,4 +1,4 @@
-require "effects/lib"
+require "uh_util"
 
 
 -- HACK:
@@ -16,7 +16,7 @@ function GetInfo()
         tag = "video",
         -- affects = AF_Shader, 
         shader = {
-            ps = "../uh_effect.cso"
+            ps = "uh_effect.cso"
         }
     };
     return info;

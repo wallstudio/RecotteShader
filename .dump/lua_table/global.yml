@@ -1,0 +1,522 @@
+# START DUMP 
+G_:
+  SetShaderColor: 
+    function: 00007FF690365690 
+  AddInOutTimeProperties: 
+    function: 000002B6517F34F0 
+  CurveProp: 
+    function: 00007FF6903D5A90 
+  clamp: 
+    function: 000002B6517A4CA0 
+  RGB256: 
+    function: 000002B6517A4E20 
+  Vector3: 
+    function: 000002B6517F35B0 
+  tostring: 
+    function: 00007FF690499CF0 
+  ipairs: 
+    function: 00007FF6904991B0 
+  NewSpeakerLayer: 
+    function: 000002B6517F3940 
+  createLabelTemplate: 
+    function: 000002B6517A4E80 
+  Margin: 
+    function: 000002B6517F2CE0 
+  print: 
+    function: 00007FF690468D50 
+  rawequal: 
+    function: 00007FF690498A40 
+  writeLineToFile: 
+    function: 000002B6517A4280 
+  Point: 
+    function: 000002B6517F2830 
+  SetShaderProperty: 
+    function: 000002B6517A4DC0 
+  select: 
+    function: 00007FF690499900 
+  SIZE: 
+    objtype: 
+      SIZE 
+    Equal: 
+      function: 000002B6517F2BF0 
+    new: 
+      function: 000002B6517F29E0 
+  GetShader: 
+    function: 00007FF690365330 
+  MAT44: 
+    mulPoints: 
+      function: 000002B6517F3AC0 
+    RotateAx: 
+      function: 000002B6517F39A0 
+    Scale: 
+      function: 000002B6517F3A30 
+    Translate: 
+      function: 000002B6517F3970 
+    new: 
+      function: 000002B6517F3850 
+    YUVtoRGB: 
+      function: 000002B6517F3490 
+    mulV3: 
+      function: 000002B6517F3580 
+    Multiply: 
+      function: 000002B6517F3A00 
+    RGBtoYUV: 
+      function: 000002B6517F33D0 
+  _VERSION: 
+    Lua 5.3 
+  coroutine: 
+    create: 
+      function: 00007FF6904A76D0 
+    wrap: 
+      function: 00007FF6904A78C0 
+    isyieldable: 
+      function: 00007FF6904A7AA0 
+    yield: 
+      function: 00007FF6904A78F0 
+    running: 
+      function: 00007FF6904A7AD0 
+    status: 
+      function: 00007FF6904A7990 
+    resume: 
+      function: 00007FF6904A7560 
+  indexOf: 
+    function: 000002B6517A4370 
+  error: 
+    function: 00007FF6904987F0 
+  pcall: 
+    function: 00007FF690499AC0 
+  ApplyEffect: 
+    function: 000002B6517A4D00 
+  GetCanvasSize: 
+    function: 00007FF690365250 
+  INT_USE_BITS: 
+    7.000000 
+  VEC2: 
+    Dot: 
+      function: 000002B6517F24A0 
+    Inv: 
+      function: 000002B6517F2BC0 
+    Add: 
+      function: 000002B6517F3040 
+    new: 
+      function: 000002B6517F2B00 
+    Sub: 
+      function: 000002B6517F2AD0 
+    Length: 
+      function: 000002B6517F2F80 
+    Rotate: 
+      function: 000002B6517F2560 
+    objtype: 
+      VEC2 
+    Equal: 
+      function: 000002B6517F2740 
+    toString: 
+      function: 000002B6517F2E30 
+    Distance: 
+      function: 000002B6517F24D0 
+  tonumber: 
+    function: 00007FF6904984C0 
+  Camera: 
+    function: 000002B6517F3C40 
+  RGBA256: 
+    function: 000002B6517A4DF0 
+  collectgarbage: 
+    function: 00007FF690498D50 
+  AddProperty: 
+    function: 00007FF690365160 
+  check: 
+    function: 00007FF690468E80 
+  TargetObject: 
+    userdata: 000002B651AD0BA0 
+  AF_Color: 
+    32.000000 
+  AF_Shader: 
+    128.000000 
+  AF_Blend: 
+    64.000000 
+  SetDuration: 
+    function: 00007FF690364FC0 
+  AF_ActionWeight: 
+    256.000000 
+  NewTextStyle: 
+    function: 000002B6517F3100 
+  io: 
+    read: 
+      function: 00007FF6904A4360 
+    lines: 
+      function: 00007FF6904A3940 
+    popen: 
+      function: 00007FF6904A34A0 
+    stdin: 
+      file (00007FF6909127C0) 
+    stdout: 
+      file (00007FF690912818) 
+    stderr: 
+      file (00007FF690912870) 
+    close: 
+      function: 00007FF6904A30C0 
+    input: 
+      function: 00007FF6904A3780 
+    flush: 
+      function: 00007FF6904A4CD0 
+    open: 
+      function: 00007FF6904A3300 
+    type: 
+      function: 00007FF6904A2E10 
+    tmpfile: 
+      function: 00007FF6904A35D0 
+    output: 
+      function: 00007FF6904A37A0 
+    write: 
+      function: 00007FF6904A4840 
+  NewVideoObject: 
+    function: 000002B6517F36D0 
+  AF_Angle: 
+    8.000000 
+  AF_Scale: 
+    4.000000 
+  AF_UV: 
+    2.000000 
+  type: 
+    function: 00007FF690498F00 
+  RGB: 
+    function: 000002B6517F2680 
+  Distance: 
+    function: 000002B6517F2770 
+  utf8: 
+    codes: 
+      function: 00007FF69049A8A0 
+    len: 
+      function: 00007FF690499F40 
+    offset: 
+      function: 00007FF69049A520 
+    char: 
+      function: 00007FF69049A360 
+    charpattern: 
+    codepoint: 
+      function: 00007FF69049A0C0 
+  Rect: 
+    function: 000002B6517F2590 
+  GetEffectLevelByTimeProperties: 
+    function: 000002B6517F46F0 
+  Vertex: 
+    function: 000002B6517F27D0 
+  dumpObjImpl: 
+    function: 000002B6517A41F0 
+  string: 
+    pack: 
+      function: 00007FF6904A0760 
+    reverse: 
+      function: 00007FF69049D5D0 
+    len: 
+      function: 00007FF69049D420 
+    gmatch: 
+      function: 00007FF69049EE10 
+    unpack: 
+      function: 00007FF6904A1220 
+    rep: 
+      function: 00007FF69049D8D0 
+    char: 
+      function: 00007FF69049DCB0 
+    dump: 
+      function: 00007FF69049DE40 
+    byte: 
+      function: 00007FF69049DB60 
+    match: 
+      function: 00007FF69049ED50 
+    sub: 
+      function: 00007FF69049D480 
+    upper: 
+      function: 00007FF69049D7D0 
+    lower: 
+      function: 00007FF69049D6D0 
+    packsize: 
+      function: 00007FF6904A0F60 
+    format: 
+      function: 00007FF69049FBB0 
+    gsub: 
+      function: 00007FF69049F2D0 
+    find: 
+      function: 00007FF69049ED40 
+  NewProperty: 
+    function: 000002B6517F3550 
+  package: 
+    cpath: 
+      C:\Program Files\RecotteStudio\?.dll;C:\Program Files\RecotteStudio\..\lib\lua\5.3\?.dll;C:\Program Files\RecotteStudio\loadall.dll;.\?.dll 
+    loadlib: 
+      function: 00007FF69049B0B0 
+    path: 
+      C:\Program Files\RecotteStudio\lua\?.lua;C:\Program Files\RecotteStudio\lua\?\init.lua;C:\Program Files\RecotteStudio\?.lua;C:\Program Files\RecotteStudio\?\init.lua;C:\Program Files\RecotteStudio\..\share\lua\5.3\?.lua;C:\Program Files\RecotteStudio\..\share\lua\5.3\?\init.lua;.\?.lua;.\?\init.lua 
+    searchpath: 
+      function: 00007FF69049B400 
+    preload: 
+    config: 
+    loaded: 
+      table: 
+        concat: 
+          function: 00007FF690497670 
+        move: 
+          function: 00007FF6904972D0 
+        pack: 
+          function: 00007FF690497940 
+        sort: 
+          function: 00007FF690498000 
+        unpack: 
+          function: 00007FF690497A10 
+        remove: 
+          function: 00007FF6904971E0 
+        insert: 
+          function: 00007FF6904970A0 
+      debug: 
+        setupvalue: 
+          function: 00007FF6904A62A0 
+        debug: 
+          function: 00007FF6904A6D70 
+        traceback: 
+          function: 00007FF6904A7110 
+        upvaluejoin: 
+          function: 00007FF6904A6430 
+        setlocal: 
+          function: 00007FF6904A5F10 
+        setmetatable: 
+          function: 00007FF6904A5380 
+        setuservalue: 
+          function: 00007FF6904A5490 
+        gethook: 
+          function: 00007FF6904A6B10 
+        upvalueid: 
+          function: 00007FF6904A63A0 
+        getmetatable: 
+          function: 00007FF6904A52D0 
+        getregistry: 
+          function: 00007FF6904A52A0 
+        sethook: 
+          function: 00007FF6904A66A0 
+        getinfo: 
+          function: 00007FF6904A5630 
+        getuservalue: 
+          function: 00007FF6904A5410 
+        getupvalue: 
+          function: 00007FF6904A6290 
+        getlocal: 
+          function: 00007FF6904A5C60 
+      string: 
+        table: 000002B6517E9C90 (recursive) 
+      effects/lib: 
+        true 
+      package: 
+        table: 000002B6517EA290 (recursive) 
+      io: 
+        table: 000002B6517EA390 (recursive) 
+      utf8: 
+        table: 000002B6517EA050 (recursive) 
+      coroutine: 
+        table: 000002B6517EA7D0 (recursive) 
+      _G: 
+        table: 000002B65195A050 (recursive) 
+      os: 
+        difftime: 
+          function: 00007FF69049CF80 
+        clock: 
+          function: 00007FF69049C6F0 
+        remove: 
+          function: 00007FF69049C490 
+        getenv: 
+          function: 00007FF69049C660 
+        time: 
+          function: 00007FF69049CD70 
+        setlocale: 
+          function: 00007FF69049D040 
+        rename: 
+          function: 00007FF69049C4F0 
+        tmpname: 
+          function: 00007FF69049C5D0 
+        exit: 
+          function: 00007FF69049D1E0 
+        execute: 
+          function: 00007FF69049C3D0 
+        date: 
+          function: 00007FF69049CA40 
+      math: 
+        floor: 
+          function: 00007FF6904A1E90 
+        acos: 
+          function: 00007FF6904A1C90 
+        sin: 
+          function: 00007FF6904A1A90 
+        modf: 
+          function: 00007FF6904A2250 
+        max: 
+          function: 00007FF6904A2840 
+        maxinteger: 
+          9223372036854775808.000000 
+        ceil: 
+          function: 00007FF6904A1F90 
+        cos: 
+          function: 00007FF6904A1B10 
+        min: 
+          function: 00007FF6904A2760 
+        sqrt: 
+          function: 00007FF6904A23A0 
+        huge: 
+          inf 
+        pi: 
+          3.141593 
+        asin: 
+          function: 00007FF6904A1C10 
+        type: 
+          function: 00007FF6904A2AC0 
+        fmod: 
+          function: 00007FF6904A2090 
+        exp: 
+          function: 00007FF6904A2600 
+        atan: 
+          function: 00007FF6904A1D10 
+        rad: 
+          function: 00007FF6904A26F0 
+        deg: 
+          function: 00007FF6904A2680 
+        mininteger: 
+          -9223372036854775808.000000 
+        randomseed: 
+          function: 00007FF6904A2A60 
+        tan: 
+          function: 00007FF6904A1B90 
+        abs: 
+          function: 00007FF6904A19B0 
+        random: 
+          function: 00007FF6904A2920 
+        log: 
+          function: 00007FF6904A24E0 
+        ult: 
+          function: 00007FF6904A2420 
+        tointeger: 
+          function: 00007FF6904A1DD0 
+    searchers: 
+      1: 
+        function: 000002B6517E9C50 
+      2: 
+        function: 000002B6517EA2D0 
+      3: 
+        function: 000002B6517EA3D0 
+      4: 
+        function: 000002B6517E9E50 
+  AF_Center: 
+    16.000000 
+  GetDuration: 
+    function: 00007FF6903650A0 
+  load: 
+    function: 00007FF6904994F0 
+  println: 
+    function: 000002B6517F29B0 
+  FileItem: 
+    function: 000002B6517F2D10 
+  pairs: 
+    function: 00007FF690499040 
+  VEC3: 
+    new: 
+      function: 000002B6517F2E00 
+    Plate: 
+      function: 000002B6517F3310 
+    toString: 
+      function: 000002B6517F2F20 
+    Equal: 
+      function: 000002B6517F2650 
+  GetCenter: 
+    function: 000002B6517F25C0 
+  _G: 
+    table: 000002B65195A050 (recursive) 
+  SetShaderFloat: 
+    function: 00007FF690365500 
+  GetInfo: 
+    function: 000002B6517A4CD0 
+  dofile: 
+    function: 00007FF690499740 
+  debug: 
+    table: 000002B6517EA450 (recursive) 
+  sp_error_handle: 
+    function: 00007FF690469020 
+  RECT: 
+    Bottom: 
+      function: 000002B6517F2D70 
+    Corner: 
+      function: 000002B6517F2C50 
+    GetCenter: 
+      function: 000002B6517F2DD0 
+    Equal: 
+      function: 000002B6517F2D40 
+    new: 
+      function: 000002B6517F2EF0 
+    objtype: 
+      RECT 
+    Right: 
+      function: 000002B6517F2530 
+    toString: 
+      function: 000002B6517F2C20 
+    Center: 
+      function: 000002B6517F2500 
+  AF_Bounds: 
+    1.000000 
+  setmetatable: 
+    function: 00007FF690498950 
+  INT_BITS: 
+    7.000000 
+  require: 
+    function: 000002B6517EAAD0 
+  Size: 
+    function: 000002B6517F2620 
+  getmetatable: 
+    function: 00007FF690498890 
+  COLOR: 
+    new: 
+      function: 000002B6517F2800 
+    objtype: 
+      COLOR 
+    Equal: 
+      function: 000002B6517F2AA0 
+    toString: 
+      function: 000002B6517F2EC0 
+    Add: 
+      function: 000002B6517F2A40 
+  _APP_VERSION: 
+    0.9.10.11 
+  loadfile: 
+    function: 00007FF6904992C0 
+  AddShaderProperty: 
+    function: 000002B6517A4EE0 
+  rawget: 
+    function: 00007FF690498BB0 
+  Matrix4x4: 
+    function: 000002B6517F3910 
+  table: 
+    table: 000002B6517EA750 (recursive) 
+  GetProperty: 
+    function: 00007FF6903D56D0 
+  os: 
+    table: 000002B6517EA790 (recursive) 
+  rawset: 
+    function: 00007FF690498C80 
+  COLOR_MAX: 
+    31.000000 
+  FitRect: 
+    function: 000002B6517F2C80 
+  dumpObj: 
+    function: 000002B6517A4670 
+  math: 
+    table: 000002B6517EA210 (recursive) 
+  COLOR_USE_BITS: 
+    5.000000 
+  InitEffect: 
+    function: 000002B6517A4E50 
+  next: 
+    function: 00007FF690498F60 
+  rawlen: 
+    function: 00007FF690498B00 
+  xpcall: 
+    function: 00007FF690499BB0 
+  assert: 
+    function: 00007FF690499870 
+  COLOR_BITS: 
+    5.000000 
+  floatToInt: 
+    function: 000002B6517A4FD0 

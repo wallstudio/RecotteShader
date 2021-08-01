@@ -1,7 +1,7 @@
-/shader_asm
-test*
+.vscode/*
+
+.dump/*
+!.dump/lua_table
+
 *.cso
-/dst/
-log.yml
 /*.zip
-/lua_table

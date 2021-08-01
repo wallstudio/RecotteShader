@@ -1,4 +1,4 @@
-#include "util.hlsl"
+#include "../lib/uh_util.hlsl"
 
 #define PARAM_DEBUG 0
 
@@ -18,18 +18,7 @@ float4 main(
     #endif
 
 
-    float3 baseColor = p.c0_0.rgb;
-    float3 rimColor = p.c0_1.rgb;
-    float rimPower = p.f1;
-
-
     float4 color = tex(uv);
-    color.rgb *= baseColor;
-
-    float4 _border = bluredBorder(uv, float2(p.w, p.h));
-    _border.rgb *= rimColor.rgb;
-    _border.rgb = 1 - pow(1-_border, rimPower);
-    color = screen(color, _border);
-
+    color = nega(color);
     return ApplyBasicParamater(pos, color);
 }

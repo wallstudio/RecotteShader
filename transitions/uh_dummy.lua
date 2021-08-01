@@ -1,4 +1,4 @@
-require "effects/lib"
+require "uh_util"
 
 
 function GetInfo()
@@ -10,7 +10,7 @@ function GetInfo()
             ja = "シェーダー適用"
         },
         shader = {
-            ps = "../uh_dummy.cso"
+            ps = "uh_dummy.cso"
         }
     }
     return info
