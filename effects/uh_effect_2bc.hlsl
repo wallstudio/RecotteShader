@@ -1,4 +1,4 @@
-#include "../lib/uh_util.hlsl"
+#include "../recotte_shader_effect_lib/uh_util.hlsl"
 
 #define PARAM_DEBUG 0
 

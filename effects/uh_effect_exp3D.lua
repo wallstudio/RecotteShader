@@ -1,4 +1,4 @@
-require "uh_util"
+require "recotte_shader_effect_lib/uh_util"
 
 function GetInfo()
 
