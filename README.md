@@ -8,27 +8,61 @@ RecotteStudioの追加エフェクトです。
 
 1. [RecottePlugin](https://github.com/wallstudio/RecottePlugin)をインストール
 
-1. [こちら](https://github.com/wallstudio/RecotteShader/releases/)から最新版をダウンロードして`<ユーザーフォルダ>\RecottePlugin\`に展開
+1. [こちら](https://github.com/wallstudio/RecotteShader/releases/)から最新版をダウンロードして`<ユーザーフォルダ>\RecottePlugin`内に展開
 
 1. レコスタを起動すると、エフェクトが増えています
 
 1. ビデオオブジェクトに設定したい場合はエフェクトと併用して「シェーダー適用」トランジションを追加してください
 
+```
+C:\Users\<ユーザー名>
+    └ RecottePlugin
+        ├ README.md
+        ├ install.bat
+        ├ …
+        └ RecotteShader
+            ├ README.md
+            ├ effects\
+            └ …
+```
 ## 機能
 
-* ブラウン管風シェーダーエフェクト
 
-* 手書き風シェーダーエフェクト
+#### ブラウン管風シェーダーエフェクト
 
-* ナイトビジョン風シェーダーエフェクト
+![](effects/uh_effect_ctr.png)
 
-* ゲームボーイ風シェーダーエフェクト
+#### 手書き風シェーダーエフェクト
 
-* 境界ぼかしシェーダーエフェクト
+![](effects/uh_effect_edge.png)
 
-* ブルームシェーダーエフェクト
+#### ナイトビジョン風シェーダーエフェクト
 
-* リムライトシェーダエフェクト（逆光）
+![](effects/uh_effect_nv.png)
+
+#### ゲームボーイ風シェーダーエフェクト
+
+![](effects/uh_effect_2bc.png)
+
+#### 境界ぼかしシェーダーエフェクト
+
+![](effects/uh_effect_softB.png)
+
+#### ブルームシェーダーエフェクト
+
+![](effects/uh_effect_bloom.png)
+
+#### パラメータ拡張エフェクト
+
+![](effects/uh_effect_exp3D.png)
+
+#### リムライトシェーダエフェクト（逆光）
+
+![](effects/uh_effect_rim.png)
+
+#### 回転エフェクト
+
+![](effects/uh_effect_rotate.png)
 
 ## CSO（シェーダ）ビルド方法
 
@@ -50,7 +84,7 @@ luaライブラリを追加したい場合は`recotte_shader_effect_lib`ディ�
 使える変数は、引数とメインテクスチャとサンプラーcBufferの`t`（時間）ぐらいです。cBufferの中身は`util.hlsl`に書いてありますが、LUAから渡されていない変数も多いようなのであまり当てになりません。
 基本的には、LUAを経由します。記述できるのはフラグメントシェーダーのみです。
 
-LUA（GUI）とやり取りできる変数はfloat6本＋128bitColor4本です。これではあまりに少ないので、低精度な値を複数詰め込んで、見かけ上のパラメータ数を増やしています。`util.hlsl`の`UnpackedParams`構造体を確認してください。GUIからShaderへのパラメータ受け渡しは`lib.lua`で定義済みなので特に触る必要はありませんが、ラベルとデフォルトだけはオーバーライドしておくと良いと思います。コピーしたLUAファイル内のコメントを好きなところを外して書き換えてください。
+LUA（GUI）とやり取りできる変数はfloat6本＋128bitColor4本です。これではあまりに少ないので、低精度な値を複数詰め込んで、見かけ上のパラメータ数を増やしています。`util.hlsl`の`UnpackedParams`構造体を確認してください。GUIからShaderへのパラメータ受け渡しは`uh_util.lua`で定義済みなので特に触る必要はありませんが、ラベルとデフォルトだけはオーバーライドしておくと良いと思います。コピーしたLUAファイル内のコメントを好きなところを外して書き換えてください。
 
 HLSLの編集が終わったら、`build.bat`を実行し、シェーダーをコンパイルします。RecotteStudioを再起動して、作ったエフェクトを設定します。この時、対象が映像アセットの場合、uh_dummyのトランジションも一緒に追加してください。すると、シェーダが適用されています。
 
