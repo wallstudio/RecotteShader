@@ -35,7 +35,7 @@ for /r %%i in (transitions\*.hlsl) do (
 mkdir %ZIP_WOKING_DIR%
 copy README.md %ZIP_WOKING_DIR%\README.md
 copy LICENSE %ZIP_WOKING_DIR%\LICENSE
-xcopy lib %ZIP_WOKING_DIR%\lib\
+xcopy recotte_shader_effect_lib %ZIP_WOKING_DIR%\recotte_shader_effect_lib\
 xcopy effects %ZIP_WOKING_DIR%\effects\
 xcopy text %ZIP_WOKING_DIR%\text\
 xcopy transitions %ZIP_WOKING_DIR%\transitions\
