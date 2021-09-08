@@ -15,15 +15,17 @@ RecotteStudioの追加エフェクトです。
 1. ビデオオブジェクトに設定したい場合はエフェクトと併用して「シェーダー適用」トランジションを追加してください
 
 ```
-C:\Users\<ユーザー名>
-    └ RecottePlugin
+Cドライブ
+  └ Users
+    └ <ユーザー名>
+      └ RecottePlugin
         ├ README.md
         ├ install.bat
         ├ …
         └ RecotteShader
-            ├ README.md
-            ├ effects\
-            └ …
+          ├ README.md
+          ├ effects\
+          └ …
 ```
 ## 機能
 
